@@ -71,5 +71,5 @@ def test_health_answers_without_network() -> None:
     )
     report = json.loads(proc.stdout)
     assert report["ok"] is True
-    assert report["extension_id"] == "com.brizzl.jotform"
+    assert report["extension_id"] == "flowsteward.jotform"
     assert report["declared_operations"] == 64 and report["effect_operations"] == 31

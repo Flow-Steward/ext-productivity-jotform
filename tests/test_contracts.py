@@ -268,7 +268,7 @@ def test_version_step_limit_and_changelog() -> None:
 
 
 def test_the_id_prefix_and_repository_are_written_in_few_places() -> None:
-    """The provisional id and repository: identity.py, and the files people read."""
+    """The id and the repository: identity.py, and the files people read."""
     expected = {"runtime/identity.py", "extension.yaml", "README.md", "ui/pages/support.yaml"}
     found = set()
     for path in BUNDLE.rglob("*"):
@@ -279,10 +279,13 @@ def test_the_id_prefix_and_repository_are_written_in_few_places() -> None:
         if path.suffix not in {".py", ".yaml", ".md", ".json", ".toml", ".txt"}:
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
-        if "com.brizzl" in text or "github.com/Brizzl-extensions" in text:
+        if (
+            "flowsteward.jotform" in text
+            or "github.com/Flow-Steward/ext-productivity-jotform" in text
+        ):
             found.add(str(path.relative_to(BUNDLE)))
     assert found <= expected | {"tests/test_contracts.py", "tests/test_entrypoint.py"}, found
-    assert "flowsteward." not in load("extension.yaml")["extension_id"]
+    assert load("extension.yaml")["extension_id"] == "flowsteward.jotform"
 
 
 def test_readiness_names_every_everyday_step_with_its_title() -> None:

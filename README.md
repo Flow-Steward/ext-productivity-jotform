@@ -2,8 +2,8 @@
 
 <img src="icon.png" width="96" alt="Jotform integration for Flow Steward">
 
-[![CI](https://img.shields.io/github/actions/workflow/status/Brizzl-extensions/ext-productivity-jotform/ci.yml?branch=main&label=CI)](https://github.com/Brizzl-extensions/ext-productivity-jotform/actions/workflows/ci.yml)
-[![Latest release](https://img.shields.io/github/v/release/Brizzl-extensions/ext-productivity-jotform?label=release)](https://github.com/Brizzl-extensions/ext-productivity-jotform/releases/latest)
+[![CI](https://img.shields.io/github/actions/workflow/status/Flow-Steward/ext-productivity-jotform/ci.yml?branch=main&label=CI)](https://github.com/Flow-Steward/ext-productivity-jotform/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/Flow-Steward/ext-productivity-jotform?label=release)](https://github.com/Flow-Steward/ext-productivity-jotform/releases/latest)
 
 Automate Jotform with Flow Steward workflows and AI agents: pick up new form submissions, pass them to other systems, create submissions and manage webhooks — without writing code.
 
@@ -82,7 +82,7 @@ Use **Download submission file** with the form and the submission; when the subm
 
 - Flow Steward documentation: <https://docs.flowsteward.org>
 - Flow Steward extension catalog: <https://github.com/Flow-Steward/extensions>
-- Issues and support: <https://github.com/Brizzl-extensions/ext-productivity-jotform/issues>
+- Issues and support: <https://github.com/Flow-Steward/ext-productivity-jotform/issues>
 - Jotform API documentation: <https://api.jotform.com/docs/>
 - Changes: [CHANGELOG.md](CHANGELOG.md)
 
@@ -98,9 +98,9 @@ python3 tests/reference/build_contracts.py
 From a Flow Steward checkout (the checks run in the `fs-audit` container):
 
 ```bash
-./core/entrypoints/cli/scripts/lint.sh --checks extension-static,extension-tests --extension-root "$PWD/workspace/extensions/com_brizzl_jotform"
-./flow-steward extensions validate com.brizzl.jotform --root workspace/extensions --health --marketplace
-./flow-steward extensions test com.brizzl.jotform --root workspace/extensions
+./core/entrypoints/cli/scripts/lint.sh --checks extension-static,extension-tests --extension-root "$PWD/workspace/extensions/flowsteward_jotform"
+./flow-steward extensions validate flowsteward.jotform --root workspace/extensions --health --marketplace
+./flow-steward extensions test flowsteward.jotform --root workspace/extensions
 ```
 
 Jotform and its marks belong to Jotform Inc.; see [BRANDING.md](BRANDING.md) for the icon's source.

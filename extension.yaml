@@ -2,7 +2,7 @@ manifest_version: 2
 lifecycle:
   data_schema_version: 1
   data_migrations: []
-extension_id: com.brizzl.jotform
+extension_id: flowsteward.jotform
 kind: tool_provider
 version: 0.1.0
 release_stage: active
@@ -17,9 +17,9 @@ description: 'Connect workflows to Jotform, the online form builder, through its
   52 operations of the Jotform API documentation have their own step. A connection
   is one Jotform account''s API key and its region: standard, EU or HIPAA.'
 vendor:
-  name: Brizzl
-  support_url: https://github.com/Brizzl-extensions/ext-productivity-jotform/issues
-  website_url: https://github.com/Brizzl-extensions/ext-productivity-jotform
+  name: Flow Steward
+  support_url: https://github.com/Flow-Steward/ext-productivity-jotform/issues
+  website_url: https://github.com/Flow-Steward/ext-productivity-jotform
 listing:
   category: productivity
   tags:
