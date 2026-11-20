@@ -1,0 +1,3193 @@
+{
+ "source": {
+  "page": "https://api.jotform.com/docs/",
+  "url": "https://cdn.jotfor.ms/s/static/ae9b124410a/js/apidocs/v1/request-models.js",
+  "sha256": "ded079d796ecde08f097af8845a409d6afdd8af3f4ad6023f3827af01c51b0a3",
+  "bytes": 80910,
+  "downloaded": "2026-11-20",
+  "client": {
+   "url": "https://cdn.jotfor.ms/s/static/ae9b124410a/js/apidocs/v1/MethodSectionView.js",
+   "sha256": "e9463bd0c0d172dc96a618fd9b736c2fa630d043f7033253c1b9bb840cd2ecf8"
+  }
+ },
+ "operations": [
+  {
+   "model": "userInfo",
+   "doc_id": "user",
+   "method": "GET",
+   "path": "/user",
+   "definition": "Get User Information",
+   "explanation": "Get user account details for this Jotform user. Including user account type, avatar URL, name, email, website URL.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "userUsage",
+   "doc_id": "user-usage",
+   "method": "GET",
+   "path": "/user/usage",
+   "definition": "Get Monthly User Usage",
+   "explanation": "Get number of form submissions received this month. Also, get number of SSL form submissions, payment form submissions and upload space used by user. ",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "userSubmissions",
+   "doc_id": "user-submissions",
+   "method": "GET",
+   "path": "/user/submissions",
+   "definition": "Get User Submissions",
+   "explanation": "Get a list of all submissions for all forms on this account. The <b>answers</b> array has the submission data. Created_at is the date of the submission.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "offset",
+     "description": "Start of each result set for submission data. Useful for pagination. Default is 0.",
+     "type": "Number",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "20"
+    },
+    {
+     "name": "limit",
+     "description": "Number of results in each result set for submission data. Default is 20. Maximum is 1000.",
+     "type": "Number",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "30"
+    },
+    {
+     "name": "filter",
+     "description": "Filters the query results to fetch a specific submissions range.",
+     "type": "jsonString",
+     "input_type": "textarea",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": [
+      "id",
+      "form_id",
+      "IP",
+      "created_at",
+      "status",
+      "new",
+      "flag",
+      "updated_at"
+     ],
+     "example": "{\"new\":\"1\"} <br> You can also use gt(greater than), lt(less than), ne(not equal to), formIDs and fullText commands to get more advanced filtering :<br> Example: {\"created_at:gt\":\"2013-01-01 00:00:00\"}<br> Example: {\"formIDs\":[\"your-form-id\",\"your-form-id#2\"]}<br> Example: {\"fullText\":\"John Brown\"}"
+    },
+    {
+     "name": "orderby",
+     "description": "Order results by a submission field name: id, form_id, IP, created_at, status, new, flag, updated_at.",
+     "type": "Enum",
+     "input_type": "select",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": [
+      "id",
+      "form_id",
+      "IP",
+      "created_at",
+      "status",
+      "new",
+      "flag",
+      "updated_at"
+     ],
+     "example": "created_at"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "userSubusers",
+   "doc_id": "user-subusers",
+   "method": "GET",
+   "path": "/user/subusers",
+   "definition": "Get Sub-User Account List",
+   "explanation": "Get a list of sub users for this accounts and list of forms and form folders with access privileges. ",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "userFolders",
+   "doc_id": "user-folders",
+   "method": "GET",
+   "path": "/user/folders",
+   "definition": "Get User Folders",
+   "explanation": "Get a list of form folders for this account. Returns name of the folder and owner of the folder for shared folders. (<b>IMPORTANT: This endpoint is deprecated. Refer to the 'label' endpoints section for the updated endpoints.</b>)",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "userReports",
+   "doc_id": "user-reports",
+   "method": "GET",
+   "path": "/user/reports",
+   "definition": "Get User Reports",
+   "explanation": "List of URLS for reports in this account. Includes reports for all of the forms. ie. Excel, CSV, printable charts, embeddable HTML tables.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "userLogin",
+   "doc_id": "user-login",
+   "method": "POST",
+   "path": "/user/login",
+   "definition": "Login user with given credentials",
+   "explanation": "",
+   "parameters": [
+    {
+     "name": "username",
+     "description": "User's username",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "password",
+     "description": "User's password",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "appName",
+     "description": "Your application name",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "access",
+     "description": "Full access able to do write operations, but readOnly just for reading operations",
+     "type": "String",
+     "input_type": "select",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": [
+      "readOnly",
+      "full"
+     ],
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "userLogout",
+   "doc_id": "user-logout",
+   "method": "GET",
+   "path": "/user/logout",
+   "definition": "Logout user",
+   "explanation": "",
+   "parameters": [
+    {
+     "name": "No parameter needed",
+     "description": "",
+     "type": "",
+     "input_type": "",
+     "parameter_type": "",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "userSettings",
+   "doc_id": "user-settings",
+   "method": "GET",
+   "path": "/user/settings",
+   "definition": "Get User Settings",
+   "explanation": "Get user's time zone and language.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "userSettingsPOST",
+   "doc_id": "post-user-settings",
+   "method": "POST",
+   "path": "/user/settings",
+   "definition": "Update User Settings",
+   "explanation": "Update user's settings like time zone and language.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "name",
+     "description": "User's name",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "John Smith"
+    },
+    {
+     "name": "email",
+     "description": "User's email",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "john@smith.com"
+    },
+    {
+     "name": "website",
+     "description": "User's website",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "www.johnsmith.com"
+    },
+    {
+     "name": "time_zone",
+     "description": "User's time zone",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "UTC"
+    },
+    {
+     "name": "company",
+     "description": "User's company",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "Interlogy, LLC."
+    },
+    {
+     "name": "securityQuestion",
+     "description": "User's security question",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "What was your first car?"
+    },
+    {
+     "name": "securityAnswer",
+     "description": "User's security answer",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "Ford"
+    },
+    {
+     "name": "industry",
+     "description": "User's industry",
+     "type": "String",
+     "input_type": "select",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": [
+      "Education",
+      "Web Design",
+      "Religious",
+      "Non-Profit",
+      "Event Organizer",
+      "Marketing",
+      "Web Development",
+      "Consultancy",
+      "Photography",
+      "Social Media",
+      "Small Business",
+      "Sports",
+      "Real Estate",
+      "Human Resources",
+      "Other"
+     ],
+     "example": "Education"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "userHistory",
+   "doc_id": "user-history",
+   "method": "GET",
+   "path": "/user/history",
+   "definition": "Get History",
+   "explanation": "User activity log about things like forms created/modified/deleted, account logins and other operations.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "action",
+     "description": "Filter results by activity performed. Default is 'all'. ",
+     "type": "Enum",
+     "input_type": "select",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": [
+      "all",
+      "userCreation",
+      "userLogin",
+      "formCreation",
+      "formUpdate",
+      "formDelete",
+      "formPurge"
+     ],
+     "example": "userLogin"
+    },
+    {
+     "name": "date",
+     "description": "Limit results by a date range. If you'd like to limit results by specific dates you can use startDate and endDate fields <b>instead</b>.",
+     "type": "Enum",
+     "input_type": "select",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": [
+      "lastWeek",
+      "lastMonth",
+      "last3Months",
+      "last6Months",
+      "lastYear",
+      "all"
+     ],
+     "example": "lastWeek"
+    },
+    {
+     "name": "sortBy",
+     "description": "Lists results by ascending and descending order",
+     "type": "Enum",
+     "input_type": "select",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": [
+      "ASC",
+      "DESC"
+     ],
+     "example": "ASC"
+    },
+    {
+     "name": "startDate",
+     "description": "Limit results to only after a specific date.  Format: MM/DD/YYYY.",
+     "type": "String",
+     "input_type": "date",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "01/31/2013"
+    },
+    {
+     "name": "endDate",
+     "description": "Limit results to only before a specific date. Format: MM/DD/YYYY.",
+     "type": "String",
+     "input_type": "date",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "12/31/2013"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "getLabelId",
+   "doc_id": "get-label-id",
+   "method": "GET",
+   "path": "/label/{id}",
+   "definition": "Get Label Details",
+   "explanation": "Get the details of a label, including its name and color.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Label ID",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "getLabelIdResources",
+   "doc_id": "get-label-id-resources",
+   "method": "GET",
+   "path": "/label/{id}/resources",
+   "definition": "Get Label Resources",
+   "explanation": "Get a list of assets in a label and their associated information.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Label ID",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "postLabel",
+   "doc_id": "post-label",
+   "method": "POST",
+   "path": "/label",
+   "definition": "Create Label",
+   "explanation": "Create a label by defining attributes such as name and color.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "name",
+     "description": "Name of the label",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": "{name}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "color",
+     "description": "Color of the label Example: #FFFFFF",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": "{color}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "parent",
+     "description": "Parent label ID",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": "{parent}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 400,
+     "reason": "No label name supplied!"
+    }
+   ]
+  },
+  {
+   "model": "putLabel",
+   "doc_id": "put-label-id",
+   "method": "PUT",
+   "path": "/label/{id}",
+   "definition": "Create Label",
+   "explanation": "Update an existing label with specified parameters, such as name and color",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "ID of the label",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "property",
+     "description": "Properties to be updated such as name and color, in JSON format.",
+     "type": "JSON",
+     "input_type": "textarea",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 400,
+     "reason": "No label name supplied!"
+    }
+   ]
+  },
+  {
+   "model": "putLabelIdAddResources",
+   "doc_id": "put-label-id-add-resources",
+   "method": "PUT",
+   "path": "/label/{id}/add-resources",
+   "definition": "Add Resources to Label",
+   "explanation": "Add the specified assets, identified by their IDs and types, into a label.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "ID of the label",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "resources",
+     "description": "Resources to be added to the label, in JSON format.",
+     "type": "JSON",
+     "input_type": "textarea",
+     "parameter_type": "JSON",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 400,
+     "reason": "No resources supplied!"
+    }
+   ]
+  },
+  {
+   "model": "putLabelIdRemoveResources",
+   "doc_id": "put-label-id-remove-resources",
+   "method": "PUT",
+   "path": "/label/{id}/remove-resources",
+   "definition": "Remove Resources from Label",
+   "explanation": "Remove the specified assets, identified by their IDs and types, from a label.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "ID of the label",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "resources",
+     "description": "Resources to be removed from the label, in JSON format.",
+     "type": "JSON",
+     "input_type": "textarea",
+     "parameter_type": "JSON",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 400,
+     "reason": "No resources supplied!"
+    }
+   ]
+  },
+  {
+   "model": "deleteLabelId",
+   "doc_id": "delete-label-id",
+   "method": "DELETE",
+   "path": "/label/{id}",
+   "definition": "Delete Label",
+   "explanation": "Delete a label along with all its sublabels.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "ID of the label",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 400,
+     "reason": "No label id supplied!"
+    }
+   ]
+  },
+  {
+   "model": "userForms",
+   "doc_id": "user-forms",
+   "method": "GET",
+   "path": "/user/forms",
+   "definition": "Get User Forms",
+   "explanation": "Get a list of forms for this account. Includes basic details such as title of the form, when it was created, number of new and total submissions.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "offset",
+     "description": "Start of each result set for form list. Useful for pagination. Default is 0.",
+     "type": "Number",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "20"
+    },
+    {
+     "name": "limit",
+     "description": "Number of results in each result set for form list. Default is 20. Maximum is 1000.",
+     "type": "Number",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "30"
+    },
+    {
+     "name": "filter",
+     "description": "Filters the query results to fetch a specific form range.",
+     "type": "jsonString",
+     "input_type": "textarea",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": [
+      "id",
+      "title",
+      "created_at",
+      "status",
+      "new",
+      "updated_at"
+     ],
+     "example": "{\"new\":\"1\"} <br> You can also use gt(greater than), lt(less than), ne(not equal to) commands to get more advanced filtering :<br> Example: {\"created_at:gt\":\"2013-01-01 00:00:00\"}"
+    },
+    {
+     "name": "orderby",
+     "description": "Order results by a form field name: id, username, title, status(ENABLED, DISABLED, DELETED), created_at, updated_at, new (unread submissions count), count (all submissions count), slug (used in form URL).",
+     "type": "Enum",
+     "input_type": "select",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": [
+      "id",
+      "username",
+      "title",
+      "status",
+      "created_at",
+      "updated_at",
+      "new",
+      "count",
+      "slug"
+     ],
+     "example": "created_at"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "userFormsPOST",
+   "doc_id": "post-user-forms",
+   "method": "POST",
+   "path": "/user/forms",
+   "definition": "Create a new form",
+   "explanation": "Create new forms with questions, properties and email settings.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[1][type]",
+     "description": "Question field type",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[1][text]",
+     "description": "Label of your question",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[1][order]",
+     "description": "Order defines the location of the question in the form.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[1][name]",
+     "description": "Slug of question label",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "properties[title]",
+     "description": "Form Title",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[2][type]",
+     "description": "Question field type",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[2][text]",
+     "description": "Label of your question",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[2][order]",
+     "description": "Order defines the location of the question in the form.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[2][name]",
+     "description": "Slug of question label",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "properties[height]",
+     "description": "Height of form",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "emails[1][type]",
+     "description": "Is this email a notification or a autoresponder? Notifications are sent to the owner of the form and autoresponders are sent to the person who fills the form.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "emails[1][from]",
+     "description": "From email address on emails. This will only work if the email address is validated on the account.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "emails[1][to]",
+     "description": "Recipient email address for the emails. If there are more than one email addresses separate them with a comma.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "emails[1][subject]",
+     "description": "Subject of the email",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "emails[1][html]",
+     "description": "Send email in HTML or plan text format. Set it to 1 if the email is HTML.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "emails[1][body]",
+     "description": "Email contents",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formsPOST",
+   "doc_id": "post-forms",
+   "method": "POST",
+   "path": "/form",
+   "definition": "Create a new form",
+   "explanation": "Create new forms with questions, properties and email settings.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[1][type]",
+     "description": "Question field type",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[1][text]",
+     "description": "Label of your question",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[1][order]",
+     "description": "Order defines the location of the question in the form.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[1][name]",
+     "description": "Slug of question label",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "properties[title]",
+     "description": "Form Title",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[2][type]",
+     "description": "Question field type",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[2][text]",
+     "description": "Label of your question",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[2][order]",
+     "description": "Order defines the location of the question in the form.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions[2][name]",
+     "description": "Slug of question label",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "properties[height]",
+     "description": "Height of form",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "emails[1][type]",
+     "description": "Is this email a notification or a autoresponder? Notifications are sent to the owner of the form and autoresponders are sent to the person who fills the form.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "emails[1][from]",
+     "description": "From email address on emails. This will only work if the email address is validated on the account.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "emails[1][to]",
+     "description": "Recipient email address for the emails. If there are more than one email addresses separate them with a comma.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "emails[1][subject]",
+     "description": "Subject of the email",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "emails[1][html]",
+     "description": "Send email in HTML or plan text format. Set it to 1 if the email is HTML.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "emails[1][body]",
+     "description": "Email contents",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "userFormsPUT",
+   "doc_id": "put-user-forms",
+   "method": "PUT",
+   "path": "/user/forms",
+   "definition": "Create new forms",
+   "explanation": "Create new forms with questions, properties and email settings.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "formContent",
+     "description": "Questions, <a href='properties/' target='_blank'>properties</a> and emails of new form.",
+     "type": "JSON",
+     "input_type": "textarea",
+     "parameter_type": "JSON",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "getUserLabels",
+   "doc_id": "get-user-labels",
+   "method": "GET",
+   "path": "/user/labels",
+   "definition": "Get Label Details",
+   "explanation": "Get all labels in a user’s account, with optional support for including related resources via parameter.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "addResources",
+     "description": "Includes related label resources.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{addResources}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formsPUT",
+   "doc_id": "put-forms",
+   "method": "PUT",
+   "path": "/form",
+   "definition": "Create new forms",
+   "explanation": "Create new forms with questions, properties and email settings.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "formContent",
+     "description": "Questions, <a href='properties/' target='_blank'>properties</a> and emails of new form.",
+     "type": "JSON",
+     "input_type": "textarea",
+     "parameter_type": "JSON",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formId",
+   "doc_id": "form-id",
+   "method": "GET",
+   "path": "/form/{id}",
+   "definition": "Get Form Details",
+   "explanation": "Get basic information about a form. Use /form/{id}/questions to get the list of questions.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": "30693660548966"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "deleteForm",
+   "doc_id": "delete-form-id",
+   "method": "DELETE",
+   "path": "/form/{id}",
+   "definition": "Delete a form",
+   "explanation": "Delete an existing form.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID: You can get form IDs when you call /user/forms. Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "cloneForm",
+   "doc_id": "post-form-id-clone",
+   "method": "POST",
+   "path": "/form/{id}/clone",
+   "definition": "Clone Form",
+   "explanation": "Clone a single form.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID. You can get form IDs when you call /user/forms.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": "31974353596870"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdQuestions",
+   "doc_id": "form-id-questions",
+   "method": "GET",
+   "path": "/form/{id}/questions",
+   "definition": "Get Form Questions",
+   "explanation": "Get a list of all questions on a form. Type describes <a href='https://www.jotform.com/help/46-quick-overview-of-form-fields/'>question field type</a>. Order is the question order in the form. Text field is the question label.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdQuestionsPOST",
+   "doc_id": "post-form-id-questions",
+   "method": "POST",
+   "path": "/form/{id}/questions",
+   "definition": "Add new question to specified form",
+   "explanation": "Add new question to specified form. Form questions might have various <a href='properties/' target='_blank'>properties</a>. Examples: Is it required? Are there any validations such as 'numeric only'? ",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID: You can get form IDs when you call /user/forms. Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "question[type]",
+     "description": "Type describes question field type.<br>Most commonly used types are control_textbox, control_textarea, control_dropdown control_radio, control_checkbox, control_fileupload, control_fullname, control_email and control_datetime",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "question[text]",
+     "description": "Label of your question",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "question[order]",
+     "description": "Order defines the location of the question in the form.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "question[name]",
+     "description": "Slug of question label",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdQuestionsPUT",
+   "doc_id": "put-form-id-questions",
+   "method": "PUT",
+   "path": "/form/{id}/questions",
+   "definition": "Add new questions to specified form",
+   "explanation": "Add new questions to specified form. Form questions might have various <a href='properties/' target='_blank'>properties</a>. Examples: Is it required? Are there any validations such as 'numeric only'? ",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID: You can get form IDs when you call /user/forms. Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "questions",
+     "description": "New question's <a href='properties/?field=form' target='_blank'>properties</a>",
+     "type": "JSON",
+     "input_type": "textarea",
+     "parameter_type": "JSON",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdQuestionQid",
+   "doc_id": "form-id-question-id",
+   "method": "GET",
+   "path": "/form/{id}/question/{qid}",
+   "definition": "Get Details About a Question",
+   "explanation": "Form questions might have various <a href='properties/' target='_blank'>properties</a>. Examples: Is it required? Are there any validations such as 'numeric only'? ",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "qid",
+     "description": "Identifier for each question on a form. You can get a list of question IDs from /form/{id}/questions end point.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{qid}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdQuestionQidPOST",
+   "doc_id": "post-form-id-question-id",
+   "method": "POST",
+   "path": "/form/{id}/question/{qid}",
+   "definition": "Add or edit a single question properties",
+   "explanation": "Edit a <a href='properties/' target='_blank'>question property</a> or add a new one. Form questions might have various properties. Examples: Is it required? Are there any validations such as 'numeric only'? ",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID: You can get form IDs when you call /user/forms. Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "qid",
+     "description": "Identifier for each question on a form. You can get a list of question IDs from /form/{id}/questions end point.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{qid}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "question[text]",
+     "description": "Label of your question",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "question[order]",
+     "description": "Order defines the location of the question in the form.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "question[name]",
+     "description": "Slug of question label",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "deleteFormQuestion",
+   "doc_id": "delete-form-id-question-id",
+   "method": "DELETE",
+   "path": "/form/{id}/question/{qid}",
+   "definition": "Delete Form Question",
+   "explanation": "Delete a single form question. ",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID: You can get form IDs when you call /user/forms.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": "31974353596870"
+    },
+    {
+     "name": "qid",
+     "description": "Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{qid}",
+     "values": null,
+     "example": "2"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdProperties",
+   "doc_id": "form-id-properties",
+   "method": "GET",
+   "path": "/form/{id}/properties",
+   "definition": "Get Form Properties",
+   "explanation": "Get a list of all <a href='properties/' target='_blank'>properties</a> on a form.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdPropertiesPOST",
+   "doc_id": "post-form-id-properties",
+   "method": "POST",
+   "path": "/form/{id}/properties",
+   "definition": "Add or edit properties of a specific form",
+   "explanation": "Edit a <a href='properties/?field=form' target='_blank'>form property</a> or add a new one.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID: You can get form IDs when you call /user/forms. Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "properties[thankurl]",
+     "description": "Redirect user to a page after submission",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "properties[activeRedirect]",
+     "description": "What happens when someone submits the form. default shows them a default thank you message. thanktext and thankurl allows you to customize the thank you message or redirect user to another page.",
+     "type": "Enum",
+     "input_type": "select",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": [
+      "default",
+      "thanktext",
+      "thankurl"
+     ],
+     "example": null
+    },
+    {
+     "name": "properties[formWidth]",
+     "description": "Resize form width",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "properties[labelWidth]",
+     "description": "Resize question label width",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdPropertiesPUT",
+   "doc_id": "put-form-id-properties",
+   "method": "PUT",
+   "path": "/form/{id}/properties",
+   "definition": "Add or edit properties of a specific form",
+   "explanation": "Edit a <a href='properties/?field=form' target='_blank'>form property</a> or add a new one.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID: You can get form IDs when you call /user/forms. Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "formProperties",
+     "description": "New <a href='properties/?field=form' target='_blank'>properties</a> like label width and style.",
+     "type": "JSON",
+     "input_type": "textarea",
+     "parameter_type": "JSON",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdPropertiesProperty",
+   "doc_id": "form-id-properties-key",
+   "method": "GET",
+   "path": "/form/{id}/properties/{key}",
+   "definition": "Get a Form Property",
+   "explanation": "Get a specific <a href='properties/?field=form' target='_blank'>property</a> of the form.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "key",
+     "description": "Property key<br>You can find property descriptions at <a href='properties/?field=form' target='_blank'>property list</a> of the form.",
+     "type": "String",
+     "input_type": "select",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{key}",
+     "values": [
+      "fontsize",
+      "options",
+      "hideMailEmptyFields",
+      "limitSubmission",
+      "messageOfLimitedForm",
+      "sendpostdata",
+      "activeRedirect",
+      "alignment",
+      "expireDate",
+      "font",
+      "fontcolor",
+      "formWidth",
+      "highlightLine",
+      "labelWidth",
+      "lineSpacing",
+      "pagetitle",
+      "styles",
+      "thanktext",
+      "unique",
+      "uniqueField",
+      "background",
+      "secure",
+      "expiredDate",
+      "injectCSS",
+      "disabled",
+      "thankurl"
+     ],
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdReports",
+   "doc_id": "form-id-reports",
+   "method": "GET",
+   "path": "/form/{id}/reports",
+   "definition": "Get form reports",
+   "explanation": "Get all the reports of a specific form.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdReportsPOST",
+   "doc_id": "post-form-id-reports",
+   "method": "POST",
+   "path": "/form/{id}/reports",
+   "definition": "Create report",
+   "explanation": "Create new report of a form with intended fields, type and title.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "title",
+     "description": "Report title",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "list_type",
+     "description": "Report type",
+     "type": "String",
+     "input_type": "select",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": [
+      "csv",
+      "excel",
+      "grid",
+      "table",
+      "rss"
+     ],
+     "example": null
+    },
+    {
+     "name": "fields",
+     "description": "Report fields.<br>User IP, submission date (dt) and question IDs.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdFiles",
+   "doc_id": "form-id-files",
+   "method": "GET",
+   "path": "/form/{id}/files",
+   "definition": "Get Form Uploads",
+   "explanation": "List of files uploaded on a form. Here is how you can access a particular file: https://www.jotform.com/uploads/{username}/{form-id}/{submission-id}/{file-name}. Size and file type is also included.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formWebHooks",
+   "doc_id": "form-id-webhooks",
+   "method": "GET",
+   "path": "/form/{id}/webhooks",
+   "definition": "List of Webhooks for a Form",
+   "explanation": "Webhooks can be used to send form submission data as an instant notification. Returns list of webhooks for this form.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formWebHooksPOST",
+   "doc_id": "post-form-id-webhooks",
+   "method": "POST",
+   "path": "/form/{id}/webhooks",
+   "definition": "Add a New Webhook",
+   "explanation": "Webhooks can be used to send form submission data as an instant notification. ",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "webhookURL",
+     "description": "Webhook URL is where form data will be posted when form is submitted. ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": "{webhookURL}",
+     "values": null,
+     "example": "http://my.web.tld/handle.php"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formWebHooksDELETE",
+   "doc_id": "delete-form-id-webhooks",
+   "method": "DELETE",
+   "path": "/form/{id}/webhooks/{whid}",
+   "definition": "Delete a webhook of a specific form",
+   "explanation": "Delete a webhook of a specific form",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "webhookID",
+     "description": "Webhook URL is where form data will be posted when form is submitted. You can get webhook IDs when you call /form/{formID}/webhooks.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{whid}",
+     "values": null,
+     "example": "0"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdSubmissions",
+   "doc_id": "form-id-submissions",
+   "method": "GET",
+   "path": "/form/{id}/submissions",
+   "definition": "Get Form Submissions",
+   "explanation": "List of form responses. <b>answers</b> array has the submitted data. Created_at is the date of the submission.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "offset",
+     "description": "Start of each result set for form list. Useful for pagination. Default is 0.",
+     "type": "Number",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "20"
+    },
+    {
+     "name": "limit",
+     "description": "Number of results in each result set for form list. Default is 20. Maximum is 1000.",
+     "type": "Number",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "30"
+    },
+    {
+     "name": "filter",
+     "description": "Filters the query results to fetch a specific submissions range.",
+     "type": "jsonString",
+     "input_type": "textarea",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": [
+      "id",
+      "form_id",
+      "IP",
+      "created_at",
+      "status",
+      "new",
+      "flag",
+      "updated_at",
+      "workflowStatus"
+     ],
+     "example": "{\"id:gt\":\"31974353596870\"} <br> You can also use gt(greater than), lt(less than), ne(not equal to) commands to get more advanced filtering :<br> Example: {\"created_at:gt\":\"2013-01-01 00:00:00\"}<br> Example: {\"workflowStatus:ne\":\"Approve\"}"
+    },
+    {
+     "name": "orderby",
+     "description": "Order results by a form field name: id, username, title, status(ENABLED, DISABLED, DELETED), created_at, updated_at, new (unread submissions count), count (all submissions count), slug (used in form URL).",
+     "type": "Enum",
+     "input_type": "select",
+     "parameter_type": "query",
+     "required": false,
+     "replace": null,
+     "values": [
+      "id",
+      "username",
+      "title",
+      "status",
+      "created_at",
+      "updated_at",
+      "new",
+      "count",
+      "slug"
+     ],
+     "example": "created_at"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "formIdSubmissionsPOST",
+   "doc_id": "post-form-id-submissions",
+   "method": "POST",
+   "path": "/form/{id}/submissions",
+   "definition": "Add a Submission to the Form",
+   "explanation": "Submit data to this form using the API. You should get a list of question IDs from form/{id}/questions and send the submission data with qid.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "submission[1]",
+     "description": "Data entered in question 1. You should first get a list of question IDs from form/{id}/questions. Or, look at the source code of the form.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": "john@example.com"
+    },
+    {
+     "name": "submission[2][first]",
+     "description": "Data entered in question 2. In this example the second question is a full name question. So, there are two fields in this question: firstName and lastName. These fields can be found by looking at the source code of the form.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "John"
+    },
+    {
+     "name": "submission[2][last]",
+     "description": "Data entered in the second part of question 2.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "Smith"
+    },
+    {
+     "name": "submission[3]",
+     "description": "Data entered in question 3. (You should get a list of question IDs from form/{id}/questions)",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": null,
+     "values": null,
+     "example": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 400,
+     "reason": "Question ID is not in request"
+    }
+   ]
+  },
+  {
+   "model": "formIdSubmissionsPUT",
+   "doc_id": "put-form-id-submissions",
+   "method": "PUT",
+   "path": "/form/{id}/submissions",
+   "definition": "Add Submissions to the Form",
+   "explanation": "Submit data to this form using the API. You should get a list of question IDs from form/{id}/questions and send the submission data with qid.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/<b>30693660548966</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "submission",
+     "description": "Submission data with question IDs.",
+     "type": "JSON",
+     "input_type": "textarea",
+     "parameter_type": "JSON",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 400,
+     "reason": "Question ID is not in request"
+    }
+   ]
+  },
+  {
+   "model": "submissionID",
+   "doc_id": "submission-id",
+   "method": "GET",
+   "path": "/submission/{id}",
+   "definition": "Get Submission Data",
+   "explanation": "Similar to /form/{form-id}/submissions. But only get a single submission. ",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Submission ID. You can get submission IDs when you call /form/{id}/submissions. View submissions directly on a browser: https://www.jotform.com/submission/<b>235194815571509962</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": "235194815571509962"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "editSubmission",
+   "doc_id": "post-submission-id",
+   "method": "POST",
+   "path": "/submission/{id}",
+   "definition": "Edit Submission Data",
+   "explanation": "Edit a single submission. ",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Submission ID. You can get submission IDs when you call /form/{id}/submissions. View submissions directly on a browser: https://www.jotform.com/submission/<b>235194815571509962</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": "235194815571509962"
+    },
+    {
+     "name": "submission[1][first]",
+     "description": "Data entered in question 1. In this example the first question is a full name question. So, there are two fields in this question: firstName and lastName. These fields can be found by looking at the source code of the form.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": "{id}",
+     "values": null,
+     "example": "John"
+    },
+    {
+     "name": "submission[new]",
+     "description": "new is 1 if this submission is not read",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "submission[flag]",
+     "description": "flag is 1 if this submission is marked as flagged.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "post",
+     "required": false,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "deleteSubmission",
+   "doc_id": "delete-submission-id",
+   "method": "DELETE",
+   "path": "/submission/{id}",
+   "definition": "Delete Submission Data",
+   "explanation": "Delete a single submission. ",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Submission ID. You can get submission IDs when you call /form/{id}/submissions. View submissions directly on a browser: https://www.jotform.com/submission/<b>235194815571509962</b>.",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": "235194815571509962"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "reportID",
+   "doc_id": "report-id",
+   "method": "GET",
+   "path": "/report/{id}",
+   "definition": "Get Report Details",
+   "explanation": "Get more information about a data report.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Report ID. You can get a list of reports from /user/reports. For example, you can see the report ID in this report URL: https://www.jotform.com/rss/<b>31753290421044</b>",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": "31753290421044"
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "deleteReport",
+   "doc_id": "delete-report-id",
+   "method": "DELETE",
+   "path": "/report/{id}",
+   "definition": "Delete a Report",
+   "explanation": "Delete an existing report.",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Report ID. You can get a list of reports from /user/reports. For example, you can see the report ID in this report URL: https://www.jotform.com/rss/<b>31753290421044</b>",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "folderID",
+   "doc_id": "folder-id",
+   "method": "GET",
+   "path": "/folder/{id}",
+   "definition": "Get Folder Details",
+   "explanation": "Get a list of forms in a folder, and other details about the form such as folder color. (<b>IMPORTANT: This endpoint is deprecated. Refer to the 'label' endpoints section for the updated endpoints.</b>)",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "Folder ID. Get a list of folders from /user/folders",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  },
+  {
+   "model": "postFolder",
+   "doc_id": "post-folder",
+   "method": "POST",
+   "path": "/folder",
+   "definition": "Create Folder",
+   "explanation": "Create a folder with specified parameters. (<b>IMPORTANT: This endpoint is deprecated. Refer to the 'label' endpoints section for the updated endpoints.</b>)",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "name",
+     "description": "Name of the folder",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{name}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "parent",
+     "description": "Parent id of the folder to be created",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": false,
+     "replace": "{parent}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "color",
+     "description": "Color of the folder Example: #FFFFFF",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": false,
+     "replace": "{color}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 400,
+     "reason": "No folder name supplied!"
+    }
+   ]
+  },
+  {
+   "model": "putFolderID",
+   "doc_id": "put-folder-id",
+   "method": "PUT",
+   "path": "/folder/{id}",
+   "definition": "Update Folder",
+   "explanation": "Update a folder with specified parameters. Also you can add forms to the folder. (<b>IMPORTANT: This endpoint is deprecated. Refer to the 'label' endpoints section for the updated endpoints.</b>)",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "ID of the folder",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "folderContent",
+     "description": "Name, color, parent of the specified folder. Also you can move forms to the specified folder.",
+     "type": "JSON",
+     "input_type": "textarea",
+     "parameter_type": "JSON",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "Folder not found!"
+    }
+   ]
+  },
+  {
+   "model": "deleteFolderID",
+   "doc_id": "delete-folder-id",
+   "method": "DELETE",
+   "path": "/folder/{id}",
+   "definition": "Delete Folder",
+   "explanation": "Delete a folder and its subfolders. (<b>IMPORTANT: This endpoint is deprecated. Refer to the 'label' endpoints section for the updated endpoints.</b>)",
+   "parameters": [
+    {
+     "name": "apikey",
+     "description": "Jotform User API Key <br/> <a target=\"_blank\" href='https://www.jotform.com/myaccount/api'>Get a new API Key</a> ",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "query",
+     "required": true,
+     "replace": null,
+     "values": null,
+     "example": null
+    },
+    {
+     "name": "id",
+     "description": "ID of the folder",
+     "type": "String",
+     "input_type": "text",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{id}",
+     "values": null,
+     "example": null
+    }
+   ],
+   "status_codes": []
+  },
+  {
+   "model": "systemPlanName",
+   "doc_id": "system-plan-planName",
+   "method": "GET",
+   "path": "/system/plan/{planName}",
+   "definition": "Get details of a plan",
+   "explanation": "Get limit and prices of a plan.",
+   "parameters": [
+    {
+     "name": "planName",
+     "description": "Name of the requested plan. FREE, BRONZE etc.",
+     "type": "String",
+     "input_type": "select",
+     "parameter_type": "url",
+     "required": true,
+     "replace": "{planName}",
+     "values": [
+      "FREE",
+      "BRONZE",
+      "SILVER",
+      "GOLD",
+      "PLATINUM"
+     ],
+     "example": null
+    }
+   ],
+   "status_codes": [
+    {
+     "code": 404,
+     "reason": "User not found"
+    }
+   ]
+  }
+ ],
+ "defined_not_listed": [],
+ "commented_out": [
+  "userApps",
+  "userInvoices",
+  "userKeys",
+  "userRewards"
+ ]
+}

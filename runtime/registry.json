@@ -1,0 +1,2775 @@
+{
+ "operations": {
+  "add_form_webhook": {
+   "area": "Submissions and webhooks",
+   "definition": "Add a New Webhook",
+   "deprecated": false,
+   "description": "Webhooks can be used to send form submission data as an instant notification.",
+   "doc_id": "post-form-id-webhooks",
+   "form": [
+    {
+     "description": "Webhook URL is where form data will be posted when form is submitted.",
+     "input": "webhook_url",
+     "name": "webhookURL",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": true
+     }
+    }
+   ],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "POST",
+   "paged": false,
+   "path": "/form/{id}/webhooks",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Add form webhook"
+  },
+  "add_question_to_form": {
+   "area": "Forms and questions",
+   "definition": "Add new question to specified form",
+   "deprecated": false,
+   "description": "Add new question to specified form. Form questions might have various properties. Examples: Is it required? Are there any validations such as 'numeric only'? question is an object: each key becomes the form field question[key] (nested objects question[key][part]).",
+   "doc_id": "post-form-id-questions",
+   "form": [],
+   "groups": [
+    {
+     "input": "question",
+     "members": [
+      {
+       "description": "Type describes question field type. Most commonly used types are control_textbox, control_textarea, control_dropdown control_radio, control_checkbox, control_fileupload, control_fullname, control_email and control_datetime",
+       "name": "question[type]",
+       "values": null
+      },
+      {
+       "description": "Label of your question",
+       "name": "question[text]",
+       "values": null
+      },
+      {
+       "description": "Order defines the location of the question in the form.",
+       "name": "question[order]",
+       "values": null
+      },
+      {
+       "description": "Slug of question label",
+       "name": "question[name]",
+       "values": null
+      }
+     ],
+     "prefix": "question",
+     "required": true
+    }
+   ],
+   "json_body": null,
+   "kind": "write",
+   "method": "POST",
+   "paged": false,
+   "path": "/form/{id}/questions",
+   "path_params": [
+    {
+     "description": "Form ID: You can get form IDs when you call /user/forms. Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Add question to form"
+  },
+  "add_questions_to_form": {
+   "area": "Forms and questions",
+   "definition": "Add new questions to specified form",
+   "deprecated": false,
+   "description": "Add new questions to specified form. Form questions might have various properties. Examples: Is it required? Are there any validations such as 'numeric only'? questions is the JSON object the documentation shows.",
+   "doc_id": "put-form-id-questions",
+   "form": [],
+   "groups": [],
+   "json_body": {
+    "description": "New question's properties",
+    "input": "questions",
+    "name": "questions",
+    "required": true,
+    "type": "object"
+   },
+   "kind": "write",
+   "method": "PUT",
+   "paged": false,
+   "path": "/form/{id}/questions",
+   "path_params": [
+    {
+     "description": "Form ID: You can get form IDs when you call /user/forms. Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Add questions to form"
+  },
+  "add_resources_to_label": {
+   "area": "Reports, labels and folders",
+   "definition": "Add Resources to Label",
+   "deprecated": false,
+   "description": "Add the specified assets, identified by their IDs and types, into a label. resources is the JSON object the documentation shows.",
+   "doc_id": "put-label-id-add-resources",
+   "form": [],
+   "groups": [],
+   "json_body": {
+    "description": "Resources to be added to the label, in JSON format.",
+    "input": "resources",
+    "name": "resources",
+    "required": true,
+    "type": "object"
+   },
+   "kind": "write",
+   "method": "PUT",
+   "paged": false,
+   "path": "/label/{id}/add-resources",
+   "path_params": [
+    {
+     "description": "ID of the label",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "400": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Add resources to label"
+  },
+  "add_submission_to_form": {
+   "area": "Submissions and webhooks",
+   "definition": "Add a Submission to the Form",
+   "deprecated": false,
+   "description": "Submit data to this form using the API. You should get a list of question IDs from form/{id}/questions and send the submission data with qid. submission is an object: each key becomes the form field submission[key] (nested objects submission[key][part]).",
+   "doc_id": "post-form-id-submissions",
+   "form": [],
+   "groups": [
+    {
+     "input": "submission",
+     "members": [
+      {
+       "description": "Data entered in question 1. You should first get a list of question IDs from form/{id}/questions. Or, look at the source code of the form.",
+       "name": "submission[1]",
+       "values": null
+      },
+      {
+       "description": "Data entered in question 2. In this example the second question is a full name question. So, there are two fields in this question: firstName and lastName. These fields can be found by looking at the source code of the form.",
+       "name": "submission[2][first]",
+       "values": null
+      },
+      {
+       "description": "Data entered in the second part of question 2.",
+       "name": "submission[2][last]",
+       "values": null
+      },
+      {
+       "description": "Data entered in question 3. (You should get a list of question IDs from form/{id}/questions)",
+       "name": "submission[3]",
+       "values": null
+      }
+     ],
+     "prefix": "submission",
+     "required": true
+    }
+   ],
+   "json_body": null,
+   "kind": "write",
+   "method": "POST",
+   "paged": false,
+   "path": "/form/{id}/submissions",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "400": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Add submission to form"
+  },
+  "add_submissions_to_form": {
+   "area": "Submissions and webhooks",
+   "definition": "Add Submissions to the Form",
+   "deprecated": false,
+   "description": "Submit data to this form using the API. You should get a list of question IDs from form/{id}/questions and send the submission data with qid. submission is the JSON list the documentation shows.",
+   "doc_id": "put-form-id-submissions",
+   "form": [],
+   "groups": [],
+   "json_body": {
+    "description": "Submission data with question IDs.",
+    "input": "submission",
+    "name": "submission",
+    "required": true,
+    "type": "array"
+   },
+   "kind": "write",
+   "method": "PUT",
+   "paged": false,
+   "path": "/form/{id}/submissions",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "400": true
+   },
+   "step_class": "confirm_batch",
+   "success": [
+    "200"
+   ],
+   "title": "Add submissions to form"
+  },
+  "clone_form": {
+   "area": "Forms and questions",
+   "definition": "Clone Form",
+   "deprecated": false,
+   "description": "Clone a single form.",
+   "doc_id": "post-form-id-clone",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "POST",
+   "paged": false,
+   "path": "/form/{id}/clone",
+   "path_params": [
+    {
+     "description": "Form ID. You can get form IDs when you call /user/forms.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Clone form"
+  },
+  "create_form": {
+   "area": "Forms and questions",
+   "definition": "Create a new form",
+   "deprecated": false,
+   "description": "Create new forms with questions, properties and email settings. questions is an object: each key becomes the form field questions[key] (nested objects questions[key][part]). properties is an object: each key becomes the form field properties[key] (nested objects properties[key][part]). emails is an object: each key becomes the form field emails[key] (nested objects emails[key][part]).",
+   "doc_id": "post-forms",
+   "form": [],
+   "groups": [
+    {
+     "input": "questions",
+     "members": [
+      {
+       "description": "Question field type",
+       "name": "questions[1][type]",
+       "values": null
+      },
+      {
+       "description": "Label of your question",
+       "name": "questions[1][text]",
+       "values": null
+      },
+      {
+       "description": "Order defines the location of the question in the form.",
+       "name": "questions[1][order]",
+       "values": null
+      },
+      {
+       "description": "Slug of question label",
+       "name": "questions[1][name]",
+       "values": null
+      },
+      {
+       "description": "Question field type",
+       "name": "questions[2][type]",
+       "values": null
+      },
+      {
+       "description": "Label of your question",
+       "name": "questions[2][text]",
+       "values": null
+      },
+      {
+       "description": "Order defines the location of the question in the form.",
+       "name": "questions[2][order]",
+       "values": null
+      },
+      {
+       "description": "Slug of question label",
+       "name": "questions[2][name]",
+       "values": null
+      }
+     ],
+     "prefix": "questions",
+     "required": true
+    },
+    {
+     "input": "properties",
+     "members": [
+      {
+       "description": "Form Title",
+       "name": "properties[title]",
+       "values": null
+      },
+      {
+       "description": "Height of form",
+       "name": "properties[height]",
+       "values": null
+      }
+     ],
+     "prefix": "properties",
+     "required": true
+    },
+    {
+     "input": "emails",
+     "members": [
+      {
+       "description": "Is this email a notification or a autoresponder? Notifications are sent to the owner of the form and autoresponders are sent to the person who fills the form.",
+       "name": "emails[1][type]",
+       "values": null
+      },
+      {
+       "description": "From email address on emails. This will only work if the email address is validated on the account.",
+       "name": "emails[1][from]",
+       "values": null
+      },
+      {
+       "description": "Recipient email address for the emails. If there are more than one email addresses separate them with a comma.",
+       "name": "emails[1][to]",
+       "values": null
+      },
+      {
+       "description": "Subject of the email",
+       "name": "emails[1][subject]",
+       "values": null
+      },
+      {
+       "description": "Send email in HTML or plan text format. Set it to 1 if the email is HTML.",
+       "name": "emails[1][html]",
+       "values": null
+      },
+      {
+       "description": "Email contents",
+       "name": "emails[1][body]",
+       "values": null
+      }
+     ],
+     "prefix": "emails",
+     "required": false
+    }
+   ],
+   "json_body": null,
+   "kind": "write",
+   "method": "POST",
+   "paged": false,
+   "path": "/form",
+   "path_params": [],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Create form"
+  },
+  "create_form_in_account": {
+   "area": "Forms and questions",
+   "definition": "Create a new form",
+   "deprecated": false,
+   "description": "Create new forms with questions, properties and email settings. questions is an object: each key becomes the form field questions[key] (nested objects questions[key][part]). properties is an object: each key becomes the form field properties[key] (nested objects properties[key][part]). emails is an object: each key becomes the form field emails[key] (nested objects emails[key][part]).",
+   "doc_id": "post-user-forms",
+   "form": [],
+   "groups": [
+    {
+     "input": "questions",
+     "members": [
+      {
+       "description": "Question field type",
+       "name": "questions[1][type]",
+       "values": null
+      },
+      {
+       "description": "Label of your question",
+       "name": "questions[1][text]",
+       "values": null
+      },
+      {
+       "description": "Order defines the location of the question in the form.",
+       "name": "questions[1][order]",
+       "values": null
+      },
+      {
+       "description": "Slug of question label",
+       "name": "questions[1][name]",
+       "values": null
+      },
+      {
+       "description": "Question field type",
+       "name": "questions[2][type]",
+       "values": null
+      },
+      {
+       "description": "Label of your question",
+       "name": "questions[2][text]",
+       "values": null
+      },
+      {
+       "description": "Order defines the location of the question in the form.",
+       "name": "questions[2][order]",
+       "values": null
+      },
+      {
+       "description": "Slug of question label",
+       "name": "questions[2][name]",
+       "values": null
+      }
+     ],
+     "prefix": "questions",
+     "required": true
+    },
+    {
+     "input": "properties",
+     "members": [
+      {
+       "description": "Form Title",
+       "name": "properties[title]",
+       "values": null
+      },
+      {
+       "description": "Height of form",
+       "name": "properties[height]",
+       "values": null
+      }
+     ],
+     "prefix": "properties",
+     "required": true
+    },
+    {
+     "input": "emails",
+     "members": [
+      {
+       "description": "Is this email a notification or a autoresponder? Notifications are sent to the owner of the form and autoresponders are sent to the person who fills the form.",
+       "name": "emails[1][type]",
+       "values": null
+      },
+      {
+       "description": "From email address on emails. This will only work if the email address is validated on the account.",
+       "name": "emails[1][from]",
+       "values": null
+      },
+      {
+       "description": "Recipient email address for the emails. If there are more than one email addresses separate them with a comma.",
+       "name": "emails[1][to]",
+       "values": null
+      },
+      {
+       "description": "Subject of the email",
+       "name": "emails[1][subject]",
+       "values": null
+      },
+      {
+       "description": "Send email in HTML or plan text format. Set it to 1 if the email is HTML.",
+       "name": "emails[1][html]",
+       "values": null
+      },
+      {
+       "description": "Email contents",
+       "name": "emails[1][body]",
+       "values": null
+      }
+     ],
+     "prefix": "emails",
+     "required": false
+    }
+   ],
+   "json_body": null,
+   "kind": "write",
+   "method": "POST",
+   "paged": false,
+   "path": "/user/forms",
+   "path_params": [],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Create form in account"
+  },
+  "create_form_report": {
+   "area": "Reports, labels and folders",
+   "definition": "Create report",
+   "deprecated": false,
+   "description": "Create new report of a form with intended fields, type and title.",
+   "doc_id": "post-form-id-reports",
+   "form": [
+    {
+     "description": "Report title",
+     "input": "title",
+     "name": "title",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": true
+     }
+    },
+    {
+     "description": "Report type",
+     "input": "list_type",
+     "name": "list_type",
+     "node": {
+      "allowed": [
+       "csv",
+       "excel",
+       "grid",
+       "table",
+       "rss"
+      ],
+      "kind": "text",
+      "max_length": 10000,
+      "required": true
+     }
+    },
+    {
+     "description": "Report fields. User IP, submission date (dt) and question IDs.",
+     "input": "fields",
+     "name": "fields",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": false
+     }
+    }
+   ],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "POST",
+   "paged": false,
+   "path": "/form/{id}/reports",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Create form report"
+  },
+  "create_forms_from_json": {
+   "area": "Forms and questions",
+   "definition": "Create new forms",
+   "deprecated": false,
+   "description": "Create new forms with questions, properties and email settings. form_content is the JSON object the documentation shows.",
+   "doc_id": "put-forms",
+   "form": [],
+   "groups": [],
+   "json_body": {
+    "description": "Questions, properties and emails of new form.",
+    "input": "form_content",
+    "name": "formContent",
+    "required": true,
+    "type": "object"
+   },
+   "kind": "write",
+   "method": "PUT",
+   "paged": false,
+   "path": "/form",
+   "path_params": [],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Create forms from JSON"
+  },
+  "create_forms_in_account_from_json": {
+   "area": "Forms and questions",
+   "definition": "Create new forms",
+   "deprecated": false,
+   "description": "Create new forms with questions, properties and email settings. form_content is the JSON object the documentation shows.",
+   "doc_id": "put-user-forms",
+   "form": [],
+   "groups": [],
+   "json_body": {
+    "description": "Questions, properties and emails of new form.",
+    "input": "form_content",
+    "name": "formContent",
+    "required": true,
+    "type": "object"
+   },
+   "kind": "write",
+   "method": "PUT",
+   "paged": false,
+   "path": "/user/forms",
+   "path_params": [],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Create forms in account from JSON"
+  },
+  "create_label": {
+   "area": "Reports, labels and folders",
+   "definition": "Create Label",
+   "deprecated": false,
+   "description": "Create a label by defining attributes such as name and color.",
+   "doc_id": "post-label",
+   "form": [
+    {
+     "description": "Name of the label",
+     "input": "name",
+     "name": "name",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": true
+     }
+    },
+    {
+     "description": "Color of the label Example: #FFFFFF",
+     "input": "color",
+     "name": "color",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": false
+     }
+    },
+    {
+     "description": "Parent label ID",
+     "input": "parent",
+     "name": "parent",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": false
+     }
+    }
+   ],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "POST",
+   "paged": false,
+   "path": "/label",
+   "path_params": [],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "400": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Create label"
+  },
+  "delete_folder": {
+   "area": "Reports, labels and folders",
+   "definition": "Delete Folder",
+   "deprecated": true,
+   "description": "Delete a folder and its subfolders. Jotform marks this operation as deprecated in favour of the labels.",
+   "doc_id": "delete-folder-id",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "DELETE",
+   "paged": false,
+   "path": "/folder/{id}",
+   "path_params": [
+    {
+     "description": "ID of the folder",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {},
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Delete folder"
+  },
+  "delete_form": {
+   "area": "Forms and questions",
+   "definition": "Delete a form",
+   "deprecated": false,
+   "description": "Delete an existing form.",
+   "doc_id": "delete-form-id",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "DELETE",
+   "paged": false,
+   "path": "/form/{id}",
+   "path_params": [
+    {
+     "description": "Form ID: You can get form IDs when you call /user/forms. Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Delete form"
+  },
+  "delete_form_question": {
+   "area": "Forms and questions",
+   "definition": "Delete Form Question",
+   "deprecated": false,
+   "description": "Delete a single form question.",
+   "doc_id": "delete-form-id-question-id",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "DELETE",
+   "paged": false,
+   "path": "/form/{id}/question/{qid}",
+   "path_params": [
+    {
+     "description": "Form ID: You can get form IDs when you call /user/forms.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    },
+    {
+     "description": "Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "input": "qid",
+     "name": "qid",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "qid"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Delete form question"
+  },
+  "delete_form_webhook": {
+   "area": "Submissions and webhooks",
+   "definition": "Delete a webhook of a specific form",
+   "deprecated": false,
+   "description": "Delete a webhook of a specific form.",
+   "doc_id": "delete-form-id-webhooks",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "DELETE",
+   "paged": false,
+   "path": "/form/{id}/webhooks/{whid}",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    },
+    {
+     "description": "Webhook URL is where form data will be posted when form is submitted. You can get webhook IDs when you call /form/{formID}/webhooks.",
+     "input": "webhook_id",
+     "name": "webhookID",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "whid"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Delete form webhook"
+  },
+  "delete_label": {
+   "area": "Reports, labels and folders",
+   "definition": "Delete Label",
+   "deprecated": false,
+   "description": "Delete a label along with all its sublabels.",
+   "doc_id": "delete-label-id",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "DELETE",
+   "paged": false,
+   "path": "/label/{id}",
+   "path_params": [
+    {
+     "description": "ID of the label",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "400": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Delete label"
+  },
+  "delete_report": {
+   "area": "Reports, labels and folders",
+   "definition": "Delete a Report",
+   "deprecated": false,
+   "description": "Delete an existing report.",
+   "doc_id": "delete-report-id",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "DELETE",
+   "paged": false,
+   "path": "/report/{id}",
+   "path_params": [
+    {
+     "description": "Report ID. You can get a list of reports from /user/reports. For example, you can see the report ID in this report URL: https://www.jotform.com/rss/31753290421044",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Delete report"
+  },
+  "delete_submission": {
+   "area": "Submissions and webhooks",
+   "definition": "Delete Submission Data",
+   "deprecated": false,
+   "description": "Delete a single submission.",
+   "doc_id": "delete-submission-id",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "DELETE",
+   "paged": false,
+   "path": "/submission/{id}",
+   "path_params": [
+    {
+     "description": "Submission ID. You can get submission IDs when you call /form/{id}/submissions. View submissions directly on a browser: https://www.jotform.com/submission/235194815571509962.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Delete submission"
+  },
+  "edit_form_properties": {
+   "area": "Forms and questions",
+   "definition": "Add or edit properties of a specific form",
+   "deprecated": false,
+   "description": "Edit a form property or add a new one. properties is an object: each key becomes the form field properties[key] (nested objects properties[key][part]).",
+   "doc_id": "post-form-id-properties",
+   "form": [],
+   "groups": [
+    {
+     "input": "properties",
+     "members": [
+      {
+       "description": "Redirect user to a page after submission",
+       "name": "properties[thankurl]",
+       "values": null
+      },
+      {
+       "description": "What happens when someone submits the form. default shows them a default thank you message. thanktext and thankurl allows you to customize the thank you message or redirect user to another page.",
+       "name": "properties[activeRedirect]",
+       "values": [
+        "default",
+        "thanktext",
+        "thankurl"
+       ]
+      },
+      {
+       "description": "Resize form width",
+       "name": "properties[formWidth]",
+       "values": null
+      },
+      {
+       "description": "Resize question label width",
+       "name": "properties[labelWidth]",
+       "values": null
+      }
+     ],
+     "prefix": "properties",
+     "required": false
+    }
+   ],
+   "json_body": null,
+   "kind": "write",
+   "method": "POST",
+   "paged": false,
+   "path": "/form/{id}/properties",
+   "path_params": [
+    {
+     "description": "Form ID: You can get form IDs when you call /user/forms. Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Edit form properties"
+  },
+  "edit_form_properties_from_json": {
+   "area": "Forms and questions",
+   "definition": "Add or edit properties of a specific form",
+   "deprecated": false,
+   "description": "Edit a form property or add a new one. form_properties is the JSON object the documentation shows.",
+   "doc_id": "put-form-id-properties",
+   "form": [],
+   "groups": [],
+   "json_body": {
+    "description": "New properties like label width and style.",
+    "input": "form_properties",
+    "name": "formProperties",
+    "required": true,
+    "type": "object"
+   },
+   "kind": "write",
+   "method": "PUT",
+   "paged": false,
+   "path": "/form/{id}/properties",
+   "path_params": [
+    {
+     "description": "Form ID: You can get form IDs when you call /user/forms. Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Edit form properties from JSON"
+  },
+  "edit_form_question": {
+   "area": "Forms and questions",
+   "definition": "Add or edit a single question properties",
+   "deprecated": false,
+   "description": "Edit a question property or add a new one. Form questions might have various properties. Examples: Is it required? Are there any validations such as 'numeric only'? question is an object: each key becomes the form field question[key] (nested objects question[key][part]).",
+   "doc_id": "post-form-id-question-id",
+   "form": [],
+   "groups": [
+    {
+     "input": "question",
+     "members": [
+      {
+       "description": "Label of your question",
+       "name": "question[text]",
+       "values": null
+      },
+      {
+       "description": "Order defines the location of the question in the form.",
+       "name": "question[order]",
+       "values": null
+      },
+      {
+       "description": "Slug of question label",
+       "name": "question[name]",
+       "values": null
+      }
+     ],
+     "prefix": "question",
+     "required": false
+    }
+   ],
+   "json_body": null,
+   "kind": "write",
+   "method": "POST",
+   "paged": false,
+   "path": "/form/{id}/question/{qid}",
+   "path_params": [
+    {
+     "description": "Form ID: You can get form IDs when you call /user/forms. Question ID: You can get question IDs when you call /form/{id}/questions.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    },
+    {
+     "description": "Identifier for each question on a form. You can get a list of question IDs from /form/{id}/questions end point.",
+     "input": "qid",
+     "name": "qid",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "qid"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Edit form question"
+  },
+  "edit_submission": {
+   "area": "Submissions and webhooks",
+   "definition": "Edit Submission Data",
+   "deprecated": false,
+   "description": "Edit a single submission. submission is an object: each key becomes the form field submission[key] (nested objects submission[key][part]).",
+   "doc_id": "post-submission-id",
+   "form": [],
+   "groups": [
+    {
+     "input": "submission",
+     "members": [
+      {
+       "description": "Data entered in question 1. In this example the first question is a full name question. So, there are two fields in this question: firstName and lastName. These fields can be found by looking at the source code of the form.",
+       "name": "submission[1][first]",
+       "values": null
+      },
+      {
+       "description": "new is 1 if this submission is not read",
+       "name": "submission[new]",
+       "values": null
+      },
+      {
+       "description": "flag is 1 if this submission is marked as flagged.",
+       "name": "submission[flag]",
+       "values": null
+      }
+     ],
+     "prefix": "submission",
+     "required": false
+    }
+   ],
+   "json_body": null,
+   "kind": "write",
+   "method": "POST",
+   "paged": false,
+   "path": "/submission/{id}",
+   "path_params": [
+    {
+     "description": "Submission ID. You can get submission IDs when you call /form/{id}/submissions. View submissions directly on a browser: https://www.jotform.com/submission/235194815571509962.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Edit submission"
+  },
+  "get_account": {
+   "area": "Account",
+   "definition": "Get User Information",
+   "deprecated": false,
+   "description": "Get user account details for this Jotform user. Including user account type, avatar URL, name, email, website URL.",
+   "doc_id": "user",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/user",
+   "path_params": [],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get account"
+  },
+  "get_account_history": {
+   "area": "Account",
+   "definition": "Get History",
+   "deprecated": false,
+   "description": "User activity log about things like forms created/modified/deleted, account logins and other operations.",
+   "doc_id": "user-history",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/user/history",
+   "path_params": [],
+   "query": [
+    {
+     "description": "Filter results by activity performed. Default is 'all'.",
+     "input": "action",
+     "name": "action",
+     "node": {
+      "allowed": [
+       "all",
+       "userCreation",
+       "userLogin",
+       "formCreation",
+       "formUpdate",
+       "formDelete",
+       "formPurge"
+      ],
+      "kind": "text",
+      "max_length": 100,
+      "required": false
+     },
+     "values": [
+      "all",
+      "userCreation",
+      "userLogin",
+      "formCreation",
+      "formUpdate",
+      "formDelete",
+      "formPurge"
+     ]
+    },
+    {
+     "description": "Limit results by a date range. If you'd like to limit results by specific dates you can use startDate and endDate fields instead.",
+     "input": "date",
+     "name": "date",
+     "node": {
+      "allowed": [
+       "lastWeek",
+       "lastMonth",
+       "last3Months",
+       "last6Months",
+       "lastYear",
+       "all"
+      ],
+      "kind": "text",
+      "max_length": 100,
+      "required": false
+     },
+     "values": [
+      "lastWeek",
+      "lastMonth",
+      "last3Months",
+      "last6Months",
+      "lastYear",
+      "all"
+     ]
+    },
+    {
+     "description": "Lists results by ascending and descending order",
+     "input": "sort_by",
+     "name": "sortBy",
+     "node": {
+      "allowed": [
+       "ASC",
+       "DESC"
+      ],
+      "kind": "text",
+      "max_length": 100,
+      "required": false
+     },
+     "values": [
+      "ASC",
+      "DESC"
+     ]
+    },
+    {
+     "description": "Limit results to only after a specific date. Format: MM/DD/YYYY.",
+     "input": "start_date",
+     "name": "startDate",
+     "node": {
+      "kind": "date_mdy",
+      "required": false
+     },
+     "values": null
+    },
+    {
+     "description": "Limit results to only before a specific date. Format: MM/DD/YYYY.",
+     "input": "end_date",
+     "name": "endDate",
+     "node": {
+      "kind": "date_mdy",
+      "required": false
+     },
+     "values": null
+    }
+   ],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get account history"
+  },
+  "get_account_settings": {
+   "area": "Account",
+   "definition": "Get User Settings",
+   "deprecated": false,
+   "description": "Get user's time zone and language.",
+   "doc_id": "user-settings",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/user/settings",
+   "path_params": [],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get account settings"
+  },
+  "get_folder": {
+   "area": "Reports, labels and folders",
+   "definition": "Get Folder Details",
+   "deprecated": true,
+   "description": "Get a list of forms in a folder, and other details about the form such as folder color. Jotform marks this operation as deprecated in favour of the labels.",
+   "doc_id": "folder-id",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/folder/{id}",
+   "path_params": [
+    {
+     "description": "Folder ID. Get a list of folders from /user/folders",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get folder"
+  },
+  "get_folders": {
+   "area": "Reports, labels and folders",
+   "definition": "Get User Folders",
+   "deprecated": true,
+   "description": "Get a list of form folders for this account. Returns name of the folder and owner of the folder for shared folders. Jotform marks this operation as deprecated in favour of the labels.",
+   "doc_id": "user-folders",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/user/folders",
+   "path_params": [],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get folders"
+  },
+  "get_form": {
+   "area": "Forms and questions",
+   "definition": "Get Form Details",
+   "deprecated": false,
+   "description": "Get basic information about a form. Use /form/{id}/questions to get the list of questions.",
+   "doc_id": "form-id",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/form/{id}",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get form"
+  },
+  "get_form_properties": {
+   "area": "Forms and questions",
+   "definition": "Get Form Properties",
+   "deprecated": false,
+   "description": "Get a list of all properties on a form.",
+   "doc_id": "form-id-properties",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/form/{id}/properties",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get form properties"
+  },
+  "get_form_property": {
+   "area": "Forms and questions",
+   "definition": "Get a Form Property",
+   "deprecated": false,
+   "description": "Get a specific property of the form.",
+   "doc_id": "form-id-properties-key",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/form/{id}/properties/{key}",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    },
+    {
+     "description": "Property key You can find property descriptions at property list of the form.",
+     "input": "key",
+     "name": "key",
+     "node": {
+      "allowed": [
+       "fontsize",
+       "options",
+       "hideMailEmptyFields",
+       "limitSubmission",
+       "messageOfLimitedForm",
+       "sendpostdata",
+       "activeRedirect",
+       "alignment",
+       "expireDate",
+       "font",
+       "fontcolor",
+       "formWidth",
+       "highlightLine",
+       "labelWidth",
+       "lineSpacing",
+       "pagetitle",
+       "styles",
+       "thanktext",
+       "unique",
+       "uniqueField",
+       "background",
+       "secure",
+       "expiredDate",
+       "injectCSS",
+       "disabled",
+       "thankurl"
+      ],
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "key"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get form property"
+  },
+  "get_form_question": {
+   "area": "Forms and questions",
+   "definition": "Get Details About a Question",
+   "deprecated": false,
+   "description": "Form questions might have various properties. Examples: Is it required? Are there any validations such as 'numeric only'?",
+   "doc_id": "form-id-question-id",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/form/{id}/question/{qid}",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    },
+    {
+     "description": "Identifier for each question on a form. You can get a list of question IDs from /form/{id}/questions end point.",
+     "input": "qid",
+     "name": "qid",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "qid"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get form question"
+  },
+  "get_form_questions": {
+   "area": "Forms and questions",
+   "definition": "Get Form Questions",
+   "deprecated": false,
+   "description": "Get a list of all questions on a form. Type describes question field type. Order is the question order in the form. Text field is the question label.",
+   "doc_id": "form-id-questions",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/form/{id}/questions",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get form questions"
+  },
+  "get_form_reports": {
+   "area": "Reports, labels and folders",
+   "definition": "Get form reports",
+   "deprecated": false,
+   "description": "Get all the reports of a specific form.",
+   "doc_id": "form-id-reports",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/form/{id}/reports",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get form reports"
+  },
+  "get_form_submissions": {
+   "area": "Submissions and webhooks",
+   "definition": "Get Form Submissions",
+   "deprecated": false,
+   "description": "List of form responses. answers array has the submitted data. Created_at is the date of the submission. Pages with offset and limit; result_set says what the page holds.",
+   "doc_id": "form-id-submissions",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": true,
+   "path": "/form/{id}/submissions",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "query": [
+    {
+     "description": "Start of each result set for form list. Useful for pagination. Default is 0.",
+     "input": "offset",
+     "name": "offset",
+     "node": {
+      "kind": "integer",
+      "maximum": 10000000,
+      "minimum": 0,
+      "required": false
+     },
+     "values": null
+    },
+    {
+     "description": "Number of results in each result set for form list. Default is 20. Maximum is 1000.",
+     "input": "limit",
+     "name": "limit",
+     "node": {
+      "kind": "integer",
+      "maximum": 1000,
+      "minimum": 1,
+      "required": false
+     },
+     "values": null
+    },
+    {
+     "description": "Filters the query results to fetch a specific submissions range.",
+     "input": "filter",
+     "name": "filter",
+     "node": {
+      "kind": "json_text",
+      "required": false
+     },
+     "values": [
+      "id",
+      "form_id",
+      "IP",
+      "created_at",
+      "status",
+      "new",
+      "flag",
+      "updated_at",
+      "workflowStatus"
+     ]
+    },
+    {
+     "description": "Order results by a form field name: id, username, title, status(ENABLED, DISABLED, DELETED), created_at, updated_at, new (unread submissions count), count (all submissions count), slug (used in form URL).",
+     "input": "orderby",
+     "name": "orderby",
+     "node": {
+      "allowed": [
+       "id",
+       "username",
+       "title",
+       "status",
+       "created_at",
+       "updated_at",
+       "new",
+       "count",
+       "slug"
+      ],
+      "kind": "text",
+      "max_length": 100,
+      "required": false
+     },
+     "values": [
+      "id",
+      "username",
+      "title",
+      "status",
+      "created_at",
+      "updated_at",
+      "new",
+      "count",
+      "slug"
+     ]
+    }
+   ],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get form submissions"
+  },
+  "get_form_uploads": {
+   "area": "Forms and questions",
+   "definition": "Get Form Uploads",
+   "deprecated": false,
+   "description": "List of files uploaded on a form. Here is how you can access a particular file: https://www.jotform.com/uploads/{username}/{form-id}/{submission-id}/{file-name}. Size and file type is also included.",
+   "doc_id": "form-id-files",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/form/{id}/files",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get form uploads"
+  },
+  "get_form_webhooks": {
+   "area": "Submissions and webhooks",
+   "definition": "List of Webhooks for a Form",
+   "deprecated": false,
+   "description": "Webhooks can be used to send form submission data as an instant notification. Returns list of webhooks for this form.",
+   "doc_id": "form-id-webhooks",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/form/{id}/webhooks",
+   "path_params": [
+    {
+     "description": "Form ID is the numbers you see on a form URL: https://www.jotformpro.com/form/30693660548966.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get form webhooks"
+  },
+  "get_forms": {
+   "area": "Forms and questions",
+   "definition": "Get User Forms",
+   "deprecated": false,
+   "description": "Get a list of forms for this account. Includes basic details such as title of the form, when it was created, number of new and total submissions. Pages with offset and limit; result_set says what the page holds.",
+   "doc_id": "user-forms",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": true,
+   "path": "/user/forms",
+   "path_params": [],
+   "query": [
+    {
+     "description": "Start of each result set for form list. Useful for pagination. Default is 0.",
+     "input": "offset",
+     "name": "offset",
+     "node": {
+      "kind": "integer",
+      "maximum": 10000000,
+      "minimum": 0,
+      "required": false
+     },
+     "values": null
+    },
+    {
+     "description": "Number of results in each result set for form list. Default is 20. Maximum is 1000.",
+     "input": "limit",
+     "name": "limit",
+     "node": {
+      "kind": "integer",
+      "maximum": 1000,
+      "minimum": 1,
+      "required": false
+     },
+     "values": null
+    },
+    {
+     "description": "Filters the query results to fetch a specific form range.",
+     "input": "filter",
+     "name": "filter",
+     "node": {
+      "kind": "json_text",
+      "required": false
+     },
+     "values": [
+      "id",
+      "title",
+      "created_at",
+      "status",
+      "new",
+      "updated_at"
+     ]
+    },
+    {
+     "description": "Order results by a form field name: id, username, title, status(ENABLED, DISABLED, DELETED), created_at, updated_at, new (unread submissions count), count (all submissions count), slug (used in form URL).",
+     "input": "orderby",
+     "name": "orderby",
+     "node": {
+      "allowed": [
+       "id",
+       "username",
+       "title",
+       "status",
+       "created_at",
+       "updated_at",
+       "new",
+       "count",
+       "slug"
+      ],
+      "kind": "text",
+      "max_length": 100,
+      "required": false
+     },
+     "values": [
+      "id",
+      "username",
+      "title",
+      "status",
+      "created_at",
+      "updated_at",
+      "new",
+      "count",
+      "slug"
+     ]
+    }
+   ],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get forms"
+  },
+  "get_label": {
+   "area": "Reports, labels and folders",
+   "definition": "Get Label Details",
+   "deprecated": false,
+   "description": "Get the details of a label, including its name and color.",
+   "doc_id": "get-label-id",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/label/{id}",
+   "path_params": [
+    {
+     "description": "Label ID",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get label"
+  },
+  "get_label_resources": {
+   "area": "Reports, labels and folders",
+   "definition": "Get Label Resources",
+   "deprecated": false,
+   "description": "Get a list of assets in a label and their associated information.",
+   "doc_id": "get-label-id-resources",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/label/{id}/resources",
+   "path_params": [
+    {
+     "description": "Label ID",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get label resources"
+  },
+  "get_monthly_usage": {
+   "area": "Account",
+   "definition": "Get Monthly User Usage",
+   "deprecated": false,
+   "description": "Get number of form submissions received this month. Also, get number of SSL form submissions, payment form submissions and upload space used by user.",
+   "doc_id": "user-usage",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/user/usage",
+   "path_params": [],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get monthly usage"
+  },
+  "get_plan_details": {
+   "area": "Account",
+   "definition": "Get details of a plan",
+   "deprecated": false,
+   "description": "Get limit and prices of a plan.",
+   "doc_id": "system-plan-planName",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/system/plan/{planName}",
+   "path_params": [
+    {
+     "description": "Name of the requested plan. FREE, BRONZE etc.",
+     "input": "plan_name",
+     "name": "planName",
+     "node": {
+      "allowed": [
+       "FREE",
+       "BRONZE",
+       "SILVER",
+       "GOLD",
+       "PLATINUM"
+      ],
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "planName"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get plan details"
+  },
+  "get_report": {
+   "area": "Reports, labels and folders",
+   "definition": "Get Report Details",
+   "deprecated": false,
+   "description": "Get more information about a data report.",
+   "doc_id": "report-id",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/report/{id}",
+   "path_params": [
+    {
+     "description": "Report ID. You can get a list of reports from /user/reports. For example, you can see the report ID in this report URL: https://www.jotform.com/rss/31753290421044",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get report"
+  },
+  "get_reports": {
+   "area": "Reports, labels and folders",
+   "definition": "Get User Reports",
+   "deprecated": false,
+   "description": "List of URLS for reports in this account. Includes reports for all of the forms. ie. Excel, CSV, printable charts, embeddable HTML tables.",
+   "doc_id": "user-reports",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/user/reports",
+   "path_params": [],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get reports"
+  },
+  "get_sub_user_accounts": {
+   "area": "Account",
+   "definition": "Get Sub-User Account List",
+   "deprecated": false,
+   "description": "Get a list of sub users for this accounts and list of forms and form folders with access privileges.",
+   "doc_id": "user-subusers",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/user/subusers",
+   "path_params": [],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get sub-user accounts"
+  },
+  "get_submission": {
+   "area": "Submissions and webhooks",
+   "definition": "Get Submission Data",
+   "deprecated": false,
+   "description": "Similar to /form/{form-id}/submissions. But only get a single submission.",
+   "doc_id": "submission-id",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": false,
+   "path": "/submission/{id}",
+   "path_params": [
+    {
+     "description": "Submission ID. You can get submission IDs when you call /form/{id}/submissions. View submissions directly on a browser: https://www.jotform.com/submission/235194815571509962.",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get submission"
+  },
+  "get_submissions_of_all_forms": {
+   "area": "Submissions and webhooks",
+   "definition": "Get User Submissions",
+   "deprecated": false,
+   "description": "Get a list of all submissions for all forms on this account. The answers array has the submission data. Created_at is the date of the submission. Pages with offset and limit; result_set says what the page holds.",
+   "doc_id": "user-submissions",
+   "form": [],
+   "groups": [],
+   "json_body": null,
+   "kind": "read",
+   "method": "GET",
+   "paged": true,
+   "path": "/user/submissions",
+   "path_params": [],
+   "query": [
+    {
+     "description": "Start of each result set for submission data. Useful for pagination. Default is 0.",
+     "input": "offset",
+     "name": "offset",
+     "node": {
+      "kind": "integer",
+      "maximum": 10000000,
+      "minimum": 0,
+      "required": false
+     },
+     "values": null
+    },
+    {
+     "description": "Number of results in each result set for submission data. Default is 20. Maximum is 1000.",
+     "input": "limit",
+     "name": "limit",
+     "node": {
+      "kind": "integer",
+      "maximum": 1000,
+      "minimum": 1,
+      "required": false
+     },
+     "values": null
+    },
+    {
+     "description": "Filters the query results to fetch a specific submissions range.",
+     "input": "filter",
+     "name": "filter",
+     "node": {
+      "kind": "json_text",
+      "required": false
+     },
+     "values": [
+      "id",
+      "form_id",
+      "IP",
+      "created_at",
+      "status",
+      "new",
+      "flag",
+      "updated_at"
+     ]
+    },
+    {
+     "description": "Order results by a submission field name: id, form_id, IP, created_at, status, new, flag, updated_at.",
+     "input": "orderby",
+     "name": "orderby",
+     "node": {
+      "allowed": [
+       "id",
+       "form_id",
+       "IP",
+       "created_at",
+       "status",
+       "new",
+       "flag",
+       "updated_at"
+      ],
+      "kind": "text",
+      "max_length": 100,
+      "required": false
+     },
+     "values": [
+      "id",
+      "form_id",
+      "IP",
+      "created_at",
+      "status",
+      "new",
+      "flag",
+      "updated_at"
+     ]
+    }
+   ],
+   "refusals": {
+    "404": true
+   },
+   "success": [
+    "200"
+   ],
+   "title": "Get submissions of all forms"
+  },
+  "remove_resources_from_label": {
+   "area": "Reports, labels and folders",
+   "definition": "Remove Resources from Label",
+   "deprecated": false,
+   "description": "Remove the specified assets, identified by their IDs and types, from a label. resources is the JSON object the documentation shows.",
+   "doc_id": "put-label-id-remove-resources",
+   "form": [],
+   "groups": [],
+   "json_body": {
+    "description": "Resources to be removed from the label, in JSON format.",
+    "input": "resources",
+    "name": "resources",
+    "required": true,
+    "type": "object"
+   },
+   "kind": "write",
+   "method": "PUT",
+   "paged": false,
+   "path": "/label/{id}/remove-resources",
+   "path_params": [
+    {
+     "description": "ID of the label",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "400": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Remove resources from label"
+  },
+  "update_account_settings": {
+   "area": "Account",
+   "definition": "Update User Settings",
+   "deprecated": false,
+   "description": "Update user's settings like time zone and language.",
+   "doc_id": "post-user-settings",
+   "form": [
+    {
+     "description": "User's name",
+     "input": "name",
+     "name": "name",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": false
+     }
+    },
+    {
+     "description": "User's email",
+     "input": "email",
+     "name": "email",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": false
+     }
+    },
+    {
+     "description": "User's website",
+     "input": "website",
+     "name": "website",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": false
+     }
+    },
+    {
+     "description": "User's time zone",
+     "input": "time_zone",
+     "name": "time_zone",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": false
+     }
+    },
+    {
+     "description": "User's company",
+     "input": "company",
+     "name": "company",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": false
+     }
+    },
+    {
+     "description": "User's security question",
+     "input": "security_question",
+     "name": "securityQuestion",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": false
+     }
+    },
+    {
+     "description": "User's security answer",
+     "input": "security_answer",
+     "name": "securityAnswer",
+     "node": {
+      "kind": "text",
+      "max_length": 10000,
+      "required": false
+     }
+    },
+    {
+     "description": "User's industry",
+     "input": "industry",
+     "name": "industry",
+     "node": {
+      "allowed": [
+       "Education",
+       "Web Design",
+       "Religious",
+       "Non-Profit",
+       "Event Organizer",
+       "Marketing",
+       "Web Development",
+       "Consultancy",
+       "Photography",
+       "Social Media",
+       "Small Business",
+       "Sports",
+       "Real Estate",
+       "Human Resources",
+       "Other"
+      ],
+      "kind": "text",
+      "max_length": 10000,
+      "required": false
+     }
+    }
+   ],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "POST",
+   "paged": false,
+   "path": "/user/settings",
+   "path_params": [],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Update account settings"
+  },
+  "update_folder": {
+   "area": "Reports, labels and folders",
+   "definition": "Update Folder",
+   "deprecated": true,
+   "description": "Update a folder with specified parameters. Also you can add forms to the folder. Jotform marks this operation as deprecated in favour of the labels. folder_content is the JSON object the documentation shows.",
+   "doc_id": "put-folder-id",
+   "form": [],
+   "groups": [],
+   "json_body": {
+    "description": "Name, color, parent of the specified folder. Also you can move forms to the specified folder.",
+    "input": "folder_content",
+    "name": "folderContent",
+    "required": true,
+    "type": "object"
+   },
+   "kind": "write",
+   "method": "PUT",
+   "paged": false,
+   "path": "/folder/{id}",
+   "path_params": [
+    {
+     "description": "ID of the folder",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "404": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Update folder"
+  },
+  "update_label": {
+   "area": "Reports, labels and folders",
+   "definition": "Create Label",
+   "deprecated": false,
+   "description": "Update an existing label with specified parameters, such as name and color.",
+   "doc_id": "put-label-id",
+   "form": [
+    {
+     "description": "Properties to be updated such as name and color, in JSON format.",
+     "input": "property",
+     "name": "property",
+     "node": {
+      "kind": "json_text",
+      "required": true
+     }
+    }
+   ],
+   "groups": [],
+   "json_body": null,
+   "kind": "write",
+   "method": "PUT",
+   "paged": false,
+   "path": "/label/{id}",
+   "path_params": [
+    {
+     "description": "ID of the label",
+     "input": "id",
+     "name": "id",
+     "node": {
+      "kind": "text",
+      "max_length": 200,
+      "required": true
+     },
+     "token": "id"
+    }
+   ],
+   "processing": {
+    "accepted_always": false,
+    "check": null
+   },
+   "query": [],
+   "refusals": {
+    "400": true
+   },
+   "step_class": "confirm",
+   "success": [
+    "200"
+   ],
+   "title": "Update label"
+  }
+ },
+ "source": {
+  "bytes": 80910,
+  "client": {
+   "sha256": "e9463bd0c0d172dc96a618fd9b736c2fa630d043f7033253c1b9bb840cd2ecf8",
+   "url": "https://cdn.jotfor.ms/s/static/ae9b124410a/js/apidocs/v1/MethodSectionView.js"
+  },
+  "downloaded": "2026-11-20",
+  "page": "https://api.jotform.com/docs/",
+  "sha256": "ded079d796ecde08f097af8845a409d6afdd8af3f4ad6023f3827af01c51b0a3",
+  "url": "https://cdn.jotfor.ms/s/static/ae9b124410a/js/apidocs/v1/request-models.js"
+ }
+}

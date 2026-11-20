@@ -1,0 +1,55 @@
+page_id: connection
+title: Connection
+description: Connect a Jotform account to this project.
+components:
+  - component_id: jotform_connections
+    type: connection_form
+    title: Jotform accounts
+    description: One connection per API key, then test it. The key is stored encrypted and never shown again.
+    data:
+      connection_kind: extension
+      connection_type: jotform
+      config_fields: [label, region]
+      secret_fields: [api_key]
+      test_action: test_connection
+    defaults:
+      label: ''
+      region: standard
+    fields:
+      - path: label
+        widget: text
+        label: Label
+        placeholder: Marketing team
+      - path: region
+        widget: select
+        label: Region
+        required: true
+        options:
+          - label: Standard (api.jotform.com)
+            value: standard
+          - label: EU (eu-api.jotform.com)
+            value: eu
+          - label: HIPAA (hipaa-api.jotform.com)
+            value: hipaa
+        help: EU accounts use the EU address, HIPAA accounts the HIPAA address.
+      - path: api_key
+        widget: secret
+        label: API key
+        required: true
+        help: A key from My Account → API in Jotform (see Setup Guide).
+    ui_schema:
+      actions:
+        test_label: Test connection
+  - component_id: connection_how
+    type: markdown
+    title: Where to get the key
+    body: |
+      In Jotform, open **My Account → API** and press **Create New Key**. Give it **Full Access** when workflows add submissions or webhooks. A key works until it is deleted there.
+  - component_id: connection_help
+    anchor_id: if-it-fails
+    type: markdown
+    title: If the test fails
+    body: |
+      - **Setup required, HTTP 401** — the key is wrong or was deleted, or the region does not match the account. Check both.
+      - **HTTP 403 on a change** — the key has read access only. Create a key with full access.
+      - **Too many requests** — the key used its API calls for today; the number depends on the plan.

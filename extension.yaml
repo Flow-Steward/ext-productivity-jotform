@@ -1,0 +1,236 @@
+manifest_version: 2
+lifecycle:
+  data_schema_version: 1
+  data_migrations: []
+extension_id: com.brizzl.jotform
+kind: tool_provider
+version: 0.1.0
+release_stage: active
+billing_mode: free
+display_name: Jotform
+description: 'Connect workflows to Jotform, the online form builder, through its REST
+  API. Everyday steps list forms and their questions, read a form''s new submissions
+  with a cursor that continues where the last run stopped, read one submission, create
+  a submission, download an uploaded file and manage a form''s webhooks.
+
+
+  52 operations of the Jotform API documentation have their own step. A connection
+  is one Jotform account''s API key and its region: standard, EU or HIPAA.'
+vendor:
+  name: Brizzl
+  support_url: https://github.com/brizzl/ext-productivity-jotform/issues
+  website_url: https://github.com/brizzl/ext-productivity-jotform
+listing:
+  category: productivity
+  tags:
+  - jotform
+  - forms
+  - submissions
+  - surveys
+  - webhooks
+  summary: Read Jotform forms and submissions, create submissions, download uploads
+    and manage webhooks.
+  categories:
+  - productivity
+  - data
+  setup_summary: "Create an API key in Jotform (My Account \u2192 API), add it and\
+    \ the account's region to the connection and run the connection test."
+features:
+- tool
+- action
+required_scopes:
+- extension:invoke
+- artifact:read
+- artifact:write
+machine_auth:
+  service_account_key: svc_ext_jotform
+  required_scopes:
+  - extension:invoke
+  - artifact:read
+  - artifact:write
+account_scope:
+  scope_type: project
+  description: Each Jotform API key is a project connection; a project may hold several.
+egress:
+  hosts:
+  - api.jotform.com
+  - eu-api.jotform.com
+  - hipaa-api.jotform.com
+  - '*.jotform.com'
+external_effects:
+- operation_id: create_submission
+  effect_kind: jotform_create_submission
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: add_webhook_if_new
+  effect_kind: jotform_add_webhook_if_new
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: remove_webhook
+  effect_kind: jotform_remove_webhook
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: create_form_in_account
+  effect_kind: jotform_create_form_in_account
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: create_form
+  effect_kind: jotform_create_form
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: create_forms_in_account_from_json
+  effect_kind: jotform_create_forms_in_account_from_json
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: create_forms_from_json
+  effect_kind: jotform_create_forms_from_json
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: clone_form
+  effect_kind: jotform_clone_form
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: add_question_to_form
+  effect_kind: jotform_add_question_to_form
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: add_questions_to_form
+  effect_kind: jotform_add_questions_to_form
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: edit_form_question
+  effect_kind: jotform_edit_form_question
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: edit_form_properties
+  effect_kind: jotform_edit_form_properties
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: edit_form_properties_from_json
+  effect_kind: jotform_edit_form_properties_from_json
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: delete_form_question
+  effect_kind: jotform_delete_form_question
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: delete_form
+  effect_kind: jotform_delete_form
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: add_submission_to_form
+  effect_kind: jotform_add_submission_to_form
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: add_submissions_to_form
+  effect_kind: jotform_add_submissions_to_form
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: edit_submission
+  effect_kind: jotform_edit_submission
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: add_form_webhook
+  effect_kind: jotform_add_form_webhook
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: delete_submission
+  effect_kind: jotform_delete_submission
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: delete_form_webhook
+  effect_kind: jotform_delete_form_webhook
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: create_form_report
+  effect_kind: jotform_create_form_report
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: create_label
+  effect_kind: jotform_create_label
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: update_label
+  effect_kind: jotform_update_label
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: add_resources_to_label
+  effect_kind: jotform_add_resources_to_label
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: remove_resources_from_label
+  effect_kind: jotform_remove_resources_from_label
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: update_folder
+  effect_kind: jotform_update_folder
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: delete_report
+  effect_kind: jotform_delete_report
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: delete_label
+  effect_kind: jotform_delete_label
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: delete_folder
+  effect_kind: jotform_delete_folder
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+- operation_id: update_account_settings
+  effect_kind: jotform_update_account_settings
+  channel: jotform_api
+  idempotency: required
+  test_mode_behavior: suppress
+runtime:
+  contract_version: extension_host_v2
+  extension_contract_v2:
+    connection_types: contracts/connection_types.yaml
+    operation_manifest: contracts/operation_manifest.yaml
+    step_ui_manifest: contracts/step_ui_manifest.yaml
+    artifact_policies: contracts/artifact_policies.yaml
+entrypoint:
+  mode: subprocess
+  command:
+  - python3
+  - main.py
+  timeout_seconds: 600
+health:
+  command:
+  - python3
+  - health.py
+  timeout_seconds: 5
+ui_manifest: ui/ui_manifest.yaml
+action_manifest: ui/actions/actions.yaml
+python_requirements: []

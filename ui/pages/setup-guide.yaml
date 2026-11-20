@@ -1,0 +1,20 @@
+page_id: setup-guide
+title: Setup Guide
+description: Connect a Jotform account in a few minutes.
+components:
+  - component_id: setup_key
+    type: markdown
+    title: Connect Jotform
+    body: |
+      1. **Sign in to Jotform** with the account whose forms the workflows use.
+      2. **Create an API key.** Open **My Account → API** and press **Create New Key**. Choose **Full Access** if the workflows add submissions or webhooks; **Read Access** is enough for reading.
+      3. **Know the region.** Accounts kept in the EU use the EU address and HIPAA accounts the HIPAA address; every other account is standard.
+      4. **Add the connection.** Open **Connection** in Flow Steward, choose the region and paste the key. Press **Test connection**.
+      5. **Check readiness.** Run **Check readiness** once: it says which steps work with this key.
+  - component_id: setup_first_workflow
+    type: markdown
+    title: First workflow
+    body: |
+      - Start with **List forms** and **Describe form questions**: they show the form ids and question ids the other steps take.
+      - **Get form submissions since** returns the new submissions and where the next run continues; pass **next_since** and **next_after_ids** to the next run.
+      - A **test run** of a workflow never sends changes to Jotform.
