@@ -18,8 +18,8 @@ description: 'Connect workflows to Jotform, the online form builder, through its
   is one Jotform account''s API key and its region: standard, EU or HIPAA.'
 vendor:
   name: Brizzl
-  support_url: https://github.com/brizzl/ext-productivity-jotform/issues
-  website_url: https://github.com/brizzl/ext-productivity-jotform
+  support_url: https://github.com/Brizzl-extensions/ext-productivity-jotform/issues
+  website_url: https://github.com/Brizzl-extensions/ext-productivity-jotform
 listing:
   category: productivity
   tags:

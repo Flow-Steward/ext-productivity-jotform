@@ -279,7 +279,7 @@ def test_the_id_prefix_and_repository_are_written_in_few_places() -> None:
         if path.suffix not in {".py", ".yaml", ".md", ".json", ".toml", ".txt"}:
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
-        if "com.brizzl" in text or "github.com/brizzl" in text:
+        if "com.brizzl" in text or "github.com/Brizzl-extensions" in text:
             found.add(str(path.relative_to(BUNDLE)))
     assert found <= expected | {"tests/test_contracts.py", "tests/test_entrypoint.py"}, found
     assert "flowsteward." not in load("extension.yaml")["extension_id"]

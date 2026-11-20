@@ -2,8 +2,8 @@
 
 <img src="icon.png" width="96" alt="Jotform integration for Flow Steward">
 
-[![CI](https://img.shields.io/github/actions/workflow/status/brizzl/ext-productivity-jotform/ci.yml?branch=main&label=CI)](https://github.com/brizzl/ext-productivity-jotform/actions/workflows/ci.yml)
-[![Latest release](https://img.shields.io/github/v/release/brizzl/ext-productivity-jotform?label=release)](https://github.com/brizzl/ext-productivity-jotform/releases/latest)
+[![CI](https://img.shields.io/github/actions/workflow/status/Brizzl-extensions/ext-productivity-jotform/ci.yml?branch=main&label=CI)](https://github.com/Brizzl-extensions/ext-productivity-jotform/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/Brizzl-extensions/ext-productivity-jotform?label=release)](https://github.com/Brizzl-extensions/ext-productivity-jotform/releases/latest)
 
 Automate Jotform with Flow Steward workflows and AI agents: pick up new form submissions, pass them to other systems, create submissions and manage webhooks — without writing code.
 
@@ -82,7 +82,7 @@ Use **Download submission file** with the form and the submission; when the subm
 
 - Flow Steward documentation: <https://docs.flowsteward.org>
 - Flow Steward extension catalog: <https://github.com/Flow-Steward/extensions>
-- Issues and support: <https://github.com/brizzl/ext-productivity-jotform/issues>
+- Issues and support: <https://github.com/Brizzl-extensions/ext-productivity-jotform/issues>
 - Jotform API documentation: <https://api.jotform.com/docs/>
 - Changes: [CHANGELOG.md](CHANGELOG.md)
 

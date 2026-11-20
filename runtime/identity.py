@@ -11,7 +11,7 @@ EXTENSION_ID = "com.brizzl.jotform"
 DISPLAY_NAME = "Jotform"
 VERSION = "0.1.0"
 VENDOR_NAME = "Brizzl"
-REPOSITORY_URL = "https://github.com/brizzl/ext-productivity-jotform"
+REPOSITORY_URL = "https://github.com/Brizzl-extensions/ext-productivity-jotform"
 SUPPORT_URL = REPOSITORY_URL + "/issues"
 #: Sent as User-Agent with every request.
 USER_AGENT = "FlowSteward-Jotform/" + VERSION
