@@ -10,7 +10,9 @@ of each result set … Default is 0", "Number of results in each result set … 
 no total, so there is no "more counted" to compare with. A read stops when the asked
 maximum is reached, the step output (or the workflow file) is full or time is short;
 it then returns what it read with ``complete`` false and the offset of the first record
-it did not read. A page too large for the output is asked again at half the size, the
+it did not read. Each page asks at most the records still wanted (``page_size`` or the
+rest of ``max_records``, whichever is smaller), so ``max_records`` holds for the first
+page too and ``next_offset`` continues exactly. A page too large for the output is asked again at half the size, the
 next one at the full size again.
 """
 
@@ -265,11 +267,12 @@ def read_pages(
         if not first and not _room(context):
             stopped = "time ran out"
             break
+        ask = min(size, most - len(pages.items))
         try:
             read = get(
                 context,
                 path,
-                [*query, ("offset", str(offset)), ("limit", str(size))],
+                [*query, ("offset", str(offset)), ("limit", str(ask))],
                 documented_as=documented_as,
             )
         except DeadlineReached:
@@ -303,12 +306,12 @@ def read_pages(
             )
         kept = select(fresh) if select is not None else fresh
         if not pages.fits(kept):
-            if size > 1 and smaller < MAX_SMALLER_PAGES:
+            if ask > 1 and smaller < MAX_SMALLER_PAGES:
                 # Ask the same records again in a page half the size; offsets count
                 # records, so nothing is skipped or read twice.
                 for record in fresh:
                     seen.discard(record.get("id"))
-                size = max(1, size // 2)
+                size = max(1, ask // 2)
                 if not smaller:
                     # Said at once, so the measure of what fits counts it.
                     pages.warnings.append(
@@ -321,15 +324,10 @@ def read_pages(
                 raise budget.too_large()
             stopped = "the output is full" if not pages.to_file else "the file is full"
             break
-        if not first and len(pages.items) + len(kept) > most:
-            stopped = f"the {most} asked for were read"
-            for record in fresh:
-                seen.discard(record.get("id"))
-            break
         pages.take(kept)
         first = False
         offset += len(rows)
-        if len(rows) < size:
+        if len(rows) < ask:
             complete = True
             break
         if size != size0:
@@ -362,6 +360,7 @@ def read_pages(
     result["limit_left"] = left
     result["warnings"] = pages.warnings
     result["_items"] = pages.items
+    result["_offset"] = offset
     return result
 
 
@@ -404,6 +403,7 @@ def list_forms(context: Context) -> dict[str, Any]:
         documented_as="get_forms",
     )
     result.pop("_items")
+    result.pop("_offset")
     budget.ensure_fits(result)
     return result
 
@@ -500,8 +500,11 @@ def get_form_submissions_since(context: Context) -> dict[str, Any]:
     ``since`` (the answers write seconds), so the submissions of the moment ``since``
     itself are in it; those named in ``after_ids`` were read before and are left out.
     A submission older than ``since`` that comes back anyway is left out too. Once the
-    window was read to its end, the cursor is the latest ``created_at`` read and the ids
-    of that moment, whatever order the answer used. When the run stops early the cursor
+    window was read to its end, the cursor is the latest ``created_at`` read, and the ids
+    of that moment are read once more on their own (every page of that second), so the
+    cursor holds every submission of that second, also those an earlier run of the same
+    window returned. If that read fails or is not read to its end, the run is not
+    complete and the cursor stays where it was. When the run stops early the cursor
     stays where it was and ``next_offset`` continues the same window."""
     given = _closed(context.operation_input, _SINCE_INPUTS)
     form_id = numeric_id(given.get("form_id"), "form_id")
@@ -566,13 +569,28 @@ def get_form_submissions_since(context: Context) -> dict[str, Any]:
     since_text = moment.strftime(_TIME_FORM) if moment is not None else None
     next_since, next_ids = since_text, list(after_ids)
     if result["complete"]:
-        dated = [(w, str(r.get("id"))) for r in items if (w := _moment(r.get("created_at")))]
+        dated = [w for r in items if (w := _moment(r.get("created_at")))]
         if dated:
-            latest = max(w for w, _ in dated)
-            ids = [i for w, i in dated if w == latest]
-            if moment is not None and latest == moment:
-                ids = list(after_ids) + [i for i in ids if i not in known]
-            next_since, next_ids = latest.strftime(_TIME_FORM), ids
+            latest = max(dated)
+            ids, failed = _ids_of_second(context, form_id, flt, latest)
+            if not failed:
+                trial = {k: v for k, v in result.items() if not k.startswith("_")}
+                trial["next_since"] = latest.strftime(_TIME_FORM)
+                trial["next_after_ids"] = ids
+                trial["warnings"] = [*warnings, LAST_WARNING_ROOM]
+                if not budget.fits(trial):
+                    failed = "its ids do not fit the step output"
+            if failed:
+                result["complete"] = False
+                result["next_offset"] = result["_offset"]
+                warnings.append(
+                    f"The window was read to its end, but the submissions of its latest "
+                    f"second {latest.strftime(_TIME_FORM)} could not be read for the cursor "
+                    f"({failed}); the cursor stays where it was: run the step again from "
+                    f"next_offset {result['_offset']} with the same since and after_ids"
+                )
+            else:
+                next_since, next_ids = latest.strftime(_TIME_FORM), ids
     result["next_since"] = next_since
     result["next_after_ids"] = next_ids
     ordered = {
@@ -589,6 +607,51 @@ def get_form_submissions_since(context: Context) -> dict[str, Any]:
     }
     budget.ensure_fits(ordered)
     return ordered
+
+
+#: The most ids one second can give the cursor (the most ``after_ids`` takes).
+MAX_AFTER_IDS = 10_000
+
+
+def _ids_of_second(
+    context: Context, form_id: str, flt: Mapping[str, Any], latest: datetime
+) -> tuple[list[str], str]:
+    """The ids of every submission created in the second ``latest`` (the window's own
+    filter kept), read in whole pages to the end; or the reason they could not be."""
+    second = dict(flt)
+    second["created_at:gt"] = (latest - timedelta(seconds=1)).strftime(_TIME_FORM)
+    second["created_at:lt"] = (latest + timedelta(seconds=1)).strftime(_TIME_FORM)
+    query = [("filter", dumps_json(second)), ("orderby", "created_at")]
+    path = f"/form/{_segment(form_id)}/submissions"
+    shown = f"GET {_entry('get_form_submissions')['path']}"
+    ids: list[str] = []
+    offset = 0
+    while True:
+        if not _room(context):
+            return [], "time ran out"
+        try:
+            read = get(
+                context,
+                path,
+                [*query, ("offset", str(offset)), ("limit", str(PAGE_SIZE))],
+                documented_as="get_form_submissions",
+            )
+        except DeadlineReached:
+            return [], "time ran out"
+        except ExtensionError as error:
+            return [], f"{shown} failed: {error.code}"
+        records = read["data"]
+        if not isinstance(records, list) or not all(isinstance(r, Mapping) for r in records):
+            return [], f"the answer to {shown} is not the documented list"
+        for record in records:
+            ident = str(record.get("id"))
+            if _moment(record.get("created_at")) == latest and ident not in ids:
+                ids.append(ident)
+        if len(ids) > MAX_AFTER_IDS:
+            return [], f"more than {MAX_AFTER_IDS} submissions share that second"
+        offset += len(records)
+        if len(records) < PAGE_SIZE:
+            return ids, ""
 
 
 def submission(context: Context, submission_id: str) -> dict[str, Any]:

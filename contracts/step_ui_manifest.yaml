@@ -68,8 +68,8 @@ forms:
     label: At most
     widget_type: integer
     required: false
-    help_text: The most records to read in this step. Default 10000. Only whole pages are returned, so
-      next_offset never skips a record; the first page is returned whole.
+    help_text: The most records to read in this step. Default 10000. Each page asks at most the records
+      still wanted, so the first page too stays within it, and next_offset continues exactly.
   - name: page_size
     label: Records per page
     widget_type: integer
@@ -132,8 +132,8 @@ forms:
     label: At most
     widget_type: integer
     required: false
-    help_text: The most records to read in this step. Default 10000. Only whole pages are returned, so
-      next_offset never skips a record; the first page is returned whole.
+    help_text: The most records to read in this step. Default 10000. Each page asks at most the records
+      still wanted, so the first page too stays within it, and next_offset continues exactly.
   - name: page_size
     label: Records per page
     widget_type: integer

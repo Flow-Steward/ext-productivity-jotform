@@ -8,3 +8,5 @@ First release, built on the operation list the Jotform API documentation page lo
 - Everyday steps: Test connection, Check readiness, Build support report, List forms, Describe form questions, Get form submissions since, Get submission answers, Create submission, Download submission file, List form webhooks, Add webhook if new and Remove webhook.
 - Connections are a Jotform API key and the account's region: standard, EU or HIPAA.
 - Changes are sent once and never retried automatically; test runs never send them.
+- Get form submissions since builds next_after_ids from its own read of the latest second (every page of it), so the cursor holds every submission of that second however many runs read the window; if that read fails the run is not complete and the cursor stays.
+- max_records holds for the first page too: each page asks at most the records still wanted.

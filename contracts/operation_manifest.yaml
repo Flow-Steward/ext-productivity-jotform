@@ -257,8 +257,8 @@ operations:
     required: false
     schema:
       title: At most
-      description: The most records to read in this step. Default 10000. Only whole pages are returned,
-        so next_offset never skips a record; the first page is returned whole.
+      description: The most records to read in this step. Default 10000. Each page asks at most the records
+        still wanted, so the first page too stays within it, and next_offset continues exactly.
       type: integer
       minimum: 1
       maximum: 100000
@@ -451,8 +451,8 @@ operations:
     required: false
     schema:
       title: At most
-      description: The most records to read in this step. Default 10000. Only whole pages are returned,
-        so next_offset never skips a record; the first page is returned whole.
+      description: The most records to read in this step. Default 10000. Each page asks at most the records
+        still wanted, so the first page too stays within it, and next_offset continues exactly.
       type: integer
       minimum: 1
       maximum: 100000
@@ -493,7 +493,7 @@ operations:
       - string
       - 'null'
       description: 'Give it as since in the next run: the latest created_at read once the window was read
-        to its end.'
+        to its end; the ids of that second are read again on their own for next_after_ids.'
   - name: next_after_ids
     value_type: array
     schema:

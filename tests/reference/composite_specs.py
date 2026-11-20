@@ -93,8 +93,9 @@ PAGING_INPUTS = [
     _int(
         "max_records",
         "At most",
-        "The most records to read in this step. Default 10000. Only whole pages are "
-        "returned, so next_offset never skips a record; the first page is returned whole.",
+        "The most records to read in this step. Default 10000. Each page asks at most the "
+        "records still wanted, so the first page too stays within it, and next_offset "
+        "continues exactly.",
         minimum=1,
         maximum=100000,
     ),
@@ -314,7 +315,8 @@ COMPOSITES: list[dict[str, Any]] = [
                 "next_since",
                 ["string", "null"],
                 "Give it as since in the next run: the latest created_at read once the window "
-                "was read to its end.",
+                "was read to its end; the ids of that second are read again on their own for "
+                "next_after_ids.",
             ),
             _out(
                 "next_after_ids",

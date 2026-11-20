@@ -81,17 +81,46 @@ def test_list_forms_reads_whole_pages_until_a_short_one() -> None:
     assert all(c.q("limit") == "3" and c.q("orderby") == "created_at" for c in fake.calls)
 
 
-def test_the_maximum_inside_a_page_stops_before_that_page() -> None:
-    fake = FakeJotform(routes={"GET /user/forms": [page(forms(0, 3)), page(forms(3, 3))]})
+def test_the_maximum_inside_a_page_asks_only_the_rest() -> None:
+    rows = forms(0, 6)
+
+    def answer(call: Any) -> Any:
+        offset, limit = int(call.q("offset")), int(call.q("limit"))
+        return page(rows[offset : offset + limit], offset, limit)
+
+    fake = FakeJotform(routes={"GET /user/forms": answer})
     out = run("list_forms", {"page_size": 3, "max_records": 4}, fake)["result"]
-    assert out["count"] == 3 and out["complete"] is False and out["next_offset"] == 3
-    assert "next_offset 3" in out["warnings"][-1]
+    assert [(c.q("offset"), c.q("limit")) for c in fake.calls] == [("0", "3"), ("3", "1")]
+    assert out["count"] == 4 and out["complete"] is False and out["next_offset"] == 4
+    assert "next_offset 4" in out["warnings"][-1]
 
 
-def test_the_first_page_is_returned_whole() -> None:
-    fake = FakeJotform(routes={"GET /user/forms": [page(forms(0, 3)), page([])]})
-    out = run("list_forms", {"page_size": 3, "max_records": 2}, fake)["result"]
-    assert out["count"] == 3 and out["next_offset"] == 3
+def test_max_records_limits_the_first_page_and_the_rest_continues_exactly() -> None:
+    rows = forms(0, 3)
+
+    def answer(call: Any) -> Any:
+        offset, limit = int(call.q("offset")), int(call.q("limit"))
+        return page(rows[offset : offset + limit], offset, limit)
+
+    fake = FakeJotform(routes={"GET /user/forms": answer})
+    out = run("list_forms", {"page_size": 10, "max_records": 1}, fake)["result"]
+    assert [(c.q("offset"), c.q("limit")) for c in fake.calls] == [("0", "1")]
+    assert [f["id"] for f in out["forms"]] == ["0"]
+    assert out["count"] == 1 and out["complete"] is False and out["next_offset"] == 1
+    given = {"page_size": 10, "start_offset": out["next_offset"]}
+    rest = run("list_forms", given, FakeJotform(routes={"GET /user/forms": answer}))["result"]
+    assert [f["id"] for f in rest["forms"]] == ["1", "2"] and rest["complete"] is True
+
+
+def test_max_records_limits_the_first_page_of_submissions_too() -> None:
+    rows = [sub(str(20 + i), f"2026-11-20 10:00:0{i}") for i in range(3)]
+    fake = FakeJotform(routes={f"GET /form/{FORM}/submissions": window(rows)})
+    out = run(
+        "get_form_submissions_since", {"form_id": FORM, "page_size": 10, "max_records": 1}, fake
+    )["result"]
+    assert [c.q("limit") for c in fake.calls] == ["1"]
+    assert [s["id"] for s in out["submissions"]] == ["20"]
+    assert out["complete"] is False and out["next_offset"] == 1
 
 
 def test_a_filter_is_sent_as_json_text_and_its_dates_must_be_real() -> None:
@@ -215,8 +244,86 @@ def test_a_run_that_stops_early_keeps_the_window_and_gives_the_offset() -> None:
     fake = FakeJotform(routes={f"GET /form/{FORM}/submissions": window(rows)})
     given = {"form_id": FORM, "since": "2026-11-20 09:00:00", "page_size": 2, "max_records": 3}
     out = run("get_form_submissions_since", given, fake)["result"]
-    assert out["complete"] is False and out["count"] == 2 and out["next_offset"] == 2
+    assert [c.q("limit") for c in fake.calls] == ["2", "1"]
+    assert out["complete"] is False and out["count"] == 3 and out["next_offset"] == 3
     assert out["next_since"] == "2026-11-20 09:00:00" and out["next_after_ids"] == []
+
+
+def jotform_window(rows: list[dict[str, Any]]) -> Any:
+    """The submissions list as Jotform answers it: the created_at filter applied, the
+    rows in created_at order, then offset and limit."""
+
+    def answer(call: Any) -> Any:
+        flt = json.loads(call.q("filter") or "{}")
+        kept = [
+            r
+            for r in rows
+            if r["created_at"] > flt.get("created_at:gt", "")
+            and r["created_at"] < flt.get("created_at:lt", "9999")
+        ]
+        kept.sort(key=lambda r: r["created_at"])
+        offset, limit = int(call.q("offset")), int(call.q("limit"))
+        return page(kept[offset : offset + limit], offset, limit)
+
+    return answer
+
+
+def test_a_window_read_in_two_runs_gives_a_cursor_that_returns_nothing_twice() -> None:
+    rows = [
+        sub("11", "2026-11-20 10:00:00"),
+        sub("21", "2026-11-20 10:00:05"),
+        sub("22", "2026-11-20 10:00:05"),
+        sub("23", "2026-11-20 10:00:05"),
+        sub("24", "2026-11-20 10:00:05"),
+    ]
+    route = f"GET /form/{FORM}/submissions"
+    first_run = {"form_id": FORM, "page_size": 2, "max_records": 3}
+    first = run(
+        "get_form_submissions_since", first_run, FakeJotform(routes={route: jotform_window(rows)})
+    )
+    one = first["result"]
+    # The run stops inside the second 10:00:05; the window continues at next_offset.
+    assert one["complete"] is False and one["next_since"] is None
+    given = {"form_id": FORM, "page_size": 2, "start_offset": one["next_offset"]}
+    fake = FakeJotform(routes={route: jotform_window(rows)})
+    two = run("get_form_submissions_since", given, fake)["result"]
+    assert two["complete"] is True
+    assert two["next_since"] == "2026-11-20 10:00:05"
+    assert sorted(two["next_after_ids"]) == ["21", "22", "23", "24"]
+    cursor = json.loads(fake.calls[-1].q("filter") or "")
+    assert cursor == {
+        "created_at:gt": "2026-11-20 10:00:04",
+        "created_at:lt": "2026-11-20 10:00:06",
+    }
+    returned = {s["id"] for s in one["submissions"]} | {s["id"] for s in two["submissions"]}
+    assert returned == {"11", "21", "22", "23", "24"}
+    third_run = {
+        "form_id": FORM,
+        "since": two["next_since"],
+        "after_ids": two["next_after_ids"],
+    }
+    fake3 = FakeJotform(routes={route: jotform_window([*rows, sub("25", "2026-11-20 10:00:09")])})
+    three = run("get_form_submissions_since", third_run, fake3)["result"]
+    assert [s["id"] for s in three["submissions"]] == ["25"]
+
+
+def test_a_cursor_second_that_cannot_be_read_keeps_the_cursor_and_is_not_complete() -> None:
+    rows = [sub("21", "2026-11-20 10:00:05"), sub("22", "2026-11-20 10:00:05")]
+    calls = {"n": 0}
+
+    def answer(call: Any) -> Any:
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return jotform_window(rows)(call)
+        return refuse(500)
+
+    fake = FakeJotform(routes={f"GET /form/{FORM}/submissions": answer})
+    given = {"form_id": FORM, "since": "2026-11-20 10:00:00", "after_ids": ["20"]}
+    out = run("get_form_submissions_since", given, fake)["result"]
+    assert [s["id"] for s in out["submissions"]] == ["21", "22"]
+    assert out["complete"] is False and out["next_offset"] == 2
+    assert out["next_since"] == "2026-11-20 10:00:00" and out["next_after_ids"] == ["20"]
+    assert any("latest second 2026-11-20 10:00:05" in w for w in out["warnings"])
 
 
 def test_older_submissions_that_come_back_are_left_out_with_a_warning() -> None:
